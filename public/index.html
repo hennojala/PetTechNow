@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <title>PetTechNow -Etusivu</title>
+
+  <script src="script.js" defer></script>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    let map;
+
+    async function initMap() {
+      const { Map } = await google.maps.importLibrary("maps");
+
+      map = new Map(document.getElementById("map"), {
+        center: { lat: 62.240622, lng: 25.745344 },
+        zoom: 14,
+      });
+
+      new google.maps.Marker({
+        position: { lat: 62.240622, lng: 25.745344 },
+        map: map,
+        title: 'Kauppakatu 1, Jyväskylä',
+        label: {
+          text: 'PetTechNow',
+          color: 'black',
+          fontSize: '14px',
+          fontWeight: 'bold',
+          background: 'white',
+          padding: '5px 10px',
+          borderRadius: '5px'
+        }
+      });
+    }
+
+    initMap();
+  </script>
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdCysXG_MEvxrj1L5V0T_i0g49Tigl2MY&callback=initMap"></script>
+  <script>
+    (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
+      key: "AIzaSyAdCysXG_MEvxrj1L5V0T_i0g49Tigl2MY",
+      v: "weekly",
+    });
+
+  </script>
+
+</head>
+
+<body>
+
+
+  <div>
+    <!--first navbar, icons-->
+    <nav id="topNav" class="navbar navbar-expand-lg ">
+      <div class="container-fluid">
+        <!--Search input and button-->
+          <ul class="navbar-nav ml-auto flex-row">
+            <li class="nav-item">
+                <input id="searchBox" class="form-control my-0 my-sm-1" type="text" placeholder="Hae..." />
+              </li>
+              <li>
+                <button id="searchBtn" class="btn my-0 my-sm-1 custom-search-btn" type="submit">
+                  <i class="fas fa-search custom-search-btn"></i>
+                </button>
+              </li>
+
+            <!--Theme icon, light and dark-->
+            <li class="nav-item">
+              <button id="light-theme-toggle" class="btn my-0 my-sm-1">
+                <i id="light-theme-icon" class="fas fa-sun"></i>
+              </button>
+            </li>
+            <li class="nav-item">
+              <button id="dark-theme-toggle" class="btn my-0 my-sm-1">
+                <i id="dark-theme-icon" class="fas fa-moon"></i>
+              </button>
+            </li>
+
+            <li id="fontSizeChange" class="nav-item">
+              <!-- Font size plus -icon -->
+              <button id="plus-font-button" class="btn my-0 my-sm-1">
+                <i class="fas fa-font"></i>
+                <i class="fas fa-plus"></i>
+              </button>
+            </li>
+            
+            <li id="fontSizeChange" class="nav-item">
+              <!-- Font size minus -icon -->
+              <button id="minus-font-button" class=" btn my-0 my-sm-1">
+                <i class="fas fa-font"></i>
+                <i class="fas fa-minus"></i>
+              </button>
+            </li>
+
+            <!--Language icon-->
+            <li class="nav-item">
+              <div class="dropdown">
+                <button class="btn my-0 my-sm-1 dropdown-toggle" type="button"
+                  id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-globe fa-lg"></i>
+                </button>
+                <div id="languageDrop" class="dropdown-menu" style="max-width: 200px"
+                  aria-labelledby="languageDropdown">
+                  <a class="dropdown-item language-option" href="#" data-language="FI">FI</a>
+                  <a class="dropdown-item language-option" href="#" data-language="SV">SV</a>
+                  <a class="dropdown-item language-option" href="#" data-language="EN">EN</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid p-0">
+      <div class="row">
+        <!-- Yläbannerikuva -->
+        <div id="ylabanner" class="col-120 p-0 banner-extras">
+          <img id="banner" src="photos/banneri.png" alt="Yläbanneri" class="img-fluid" />
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- ALEMPI NAVIPALKKI -->
+    <nav id="lowerNav" class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <span class="navbar-text d-lg-none">
+          <a id="active-Name" href="#" class="active-page-link" onclick="showView('etusivu')">Etusivu</a>
+        </span>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContentLowerNav" aria-controls="navbarSupportedContentLowerNav"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContentLowerNav">
+          <ul class="navbar-nav mx-auto" style="text-align: center">
+            <li class="nav-item">
+              <a id="etusivu-link" class="nav-link" href="#" onclick="showView('etusivu-page')"
+                data-view="etusivu-page">Etusivu</a>
+              <span class="nav-divider">|</span>
+            </li>
+            <li class="nav-item">
+              <a id="ajankohtaista-link" class="nav-link" href="#" onclick="showView('ajankohtaista-page')"
+                data-view="ajankohtaista-page">Ajankohtaista</a>
+              <span class="nav-divider">|</span>
+            </li>
+            <li class="nav-item dropdown">
+              <a id="tuotteet-link" class="nav-link dropdown-toggle" onclick="showView('tuotteet-page')"
+                data-view="tuotteet-page" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Tuotteet
+              </a>
+              <span class="nav-divider">|</span>
+              <div class="dropdown-menu" style="background-color: lightgrey; border: 0px">
+                <a id="kaikki-tuotteet-link" class="dropdown-item" href="#" style="color: #333"
+                  onclick="showView('kaikki-page')" data-view="kaikki">Kaikki tuotteet</a>
+                <a id="ruokintalaitteet-link" class="dropdown-item" href="#" style="color: #333"
+                  onclick="showView('ruokintalaitteet-page')" data-view="ruokintalaitteet">Ruokintalaitteet</a>
+                <a id="terveydenseuranta-link" class="dropdown-item" href="#" style="color: #333"
+                  onclick="showView('terveydenseuranta-page')" data-view="terveydenseuranta">Terveydenseuranta</a>
+                <a id="valvontalaitteet-link" class="dropdown-item" href="#" style="color: #333"
+                  onclick="showView('valvontalaitteet-page')" data-view="valvontalaitteet">Valvontalaitteet</a>
+                <a id="lelut-link" class="dropdown-item" href="#" style="color: #333" onclick="showView('lelut-page')"
+                  data-view="lelut">Lelut</a>
+
+                <a id="muut-link" class="dropdown-item" href="#" style="color: #333" onclick="showView('muut-page')"
+                  data-view="muut">Muut</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a id="yritykset-link" class="nav-link" href="#" onclick="showView('yritykset-page')"
+                data-view="yritykset-page">Yritykset</a>
+              <span class="nav-divider">|</span>
+            </li>
+            <li class="nav-item">
+              <a id="taustatoiminta-link" class="nav-link" href="#" onclick="showView('taustatoiminta-page')"
+                data-view="taustatoiminta-page">Taustatoiminta</a>
+              <span class="nav-divider">|</span>
+            </li>
+            <li class="nav-item">
+              <a id="yhteystiedot-link" class="nav-link" href="#" onclick="showView('yhteystiedot-page')"
+                data-view="yhteystiedot-page">Yhteystiedot</a>
+              <span class="nav-divider">|</span>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- SISÄLTÖ -->
+    <div id="etusivu-page" class="view">
+      <div class="container"></div>
+      <div class="row"></div>
+      <div class="col-12">
+        <h1>Kiinnostavat lemmikkiteknologiaratkaisut maailmalta...</h1>
+      </div>
+      <div class="card-container">
+        <div>
+          <h2>...tätä on PetTechNow</h2>
+        </div>
+
+        <div class="row justify-content-center ">
+          <!-- Ensimmäinen kortti -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4 d-flex">
+            <div class="card">
+              <div class="card-body mx-auto ">
+                <h5 class="card-title">Ajankohtaisia aiheita</h5>
+                <hr>
+                <p class="card-text">
+                  Lemmikinomistajille, teknologiaharrastajille ja kaikille aiheesta kiinnostuneille suunnattu sivusto,
+                  joka
+                  tarjoaa ajankohtaista tietoa markkinoilla olevista
+                  lemmikkiteknologioista ja ratkaisuista.
+                </p>
+                <!-- Navigaatio-otsikko ja kuva -->
+                <div class="navigation">
+                  <a class="nav-link" href="#" onclick="showView('ajankohtaista-page')" data-view="ajankohtaista-page">
+                    <h6>Ajankohtaisiin</h6>
+                    <div id="img-background-area">
+                      <img src="photos/newsDog1.png" class="card-img-top mx-auto img-fluid" alt="NewsDog">
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Toinen kortti -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4 d-flex">
+
+            <div id="card-middle" class="card">
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Tuoteratkaisujen esittelyä</h5>
+                <hr>
+                <p class="card-text">
+                  PetTechNow esittelee älykkäitä ruokinta- ja terveydenseurantaratkaisuja, valvontalaitteita ja
+                  lelujärjestelmiä, sekä monia muita lemmikkeihin kohdistuvia teknologiainnovaatioita.
+                </p>
+                <!-- Navigaatio-otsikko ja kuva -->
+                <div class="navigation">
+                  <a class="nav-link" href="#" onclick="showView('tuotteet-page')" data-view="tuotteet-page">
+                    <h6>Tuotteisiin</h6>
+                    <div id="img-background-area">
+                      <img src="photos/catProducts.png" class="card-img-top mx-auto img-fluid" alt="Kuva 2">
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Kolmas kortti -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4 d-flex">
+
+            <div id="card-middle" class="card">
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Yrityksiä tuotteiden takana</h5>
+                <hr>
+                <p class="card-text">
+                  Esittelyssä olevat tuotteet ovat helposti hankittavissa, sillä PetTechNow ilmoittaa aina tuotteen
+                  takana olevan yrityksen esittelyssään. Esittelemme lisäksi lemmikkiteknologioita valmistavia
+                  yrityksiä.
+                </p>
+                <!-- Navigaatio-otsikko ja kuva -->
+                <div class="navigation">
+                  <a class="nav-link" href="#" onclick="showView('yritykset-page')" data-view="yritykset-page">
+                    <h6>Yrityksiin</h6>
+                    <div id="img-background-area">
+                      <img src="photos/businessDog.png" class="card-img-top mx-auto img-fluid" alt="Kuva 3">
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Neljäs kortti -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4 d-flex">
+
+            <div class="card">
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Harrastuspohjainen alusta</h5>
+                <hr>
+                <p class="card-text">
+                  PetTechNow on täysin harrastuspohjainen sivusto, jossa ei käydä myydä mitään. Tuotteita myyvillä
+                  yrityksillä ei ole sivustolle yhteistöitä tai muitakaan sitoumuksia. Tieto tuotteista on koottu
+                  hakukoneista internetistä.
+                </p>
+                <!-- Navigaatio-otsikko ja kuva -->
+                <div class="navigation">
+                  <a class="nav-link" href="#" onclick="showView('taustatoiminta-page')"
+                    data-view="taustatoiminta-page">
+
+                    <h6>Taustatoimintaan</h6>
+                    <div id="img-background-area">
+                      <img src="photos/caBye.png" class="card-img-top mx-auto img-fluid" alt="Kuva 4">
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="newsletter" class="position-relative">
+        <div class="row">
+          <!-- Ensimmäinen sarake: Esitelmäteksti -->
+          <div class="col-lg-4 col-md-12 order-lg-1">
+            <h5 style="margin-top: 40px; margin-left: 50px;">Tilaa uutiskirjeemme</h5>
+            <h5 id="newstext" style="margin-left: 75px;">– saat tuoreimmat lemmikkiteknologiatrendit suoraan
+              sähköpostiisi!
+            </h5>
+          </div>
+          <!-- Toinen sarake: Sähköposti ja nappi -->
+          <div class="col-lg-4 col-md-12 order-lg-2">
+            <h5 id="sposti" style="margin-left: 75px; margin-top: 40px;">Sähköpostisi</h5>
+            <form id="newsform" style="margin-left: 75px;">
+              <div class="form-group row">
+                <div class="col">
+                  <input id="spostiform" type="email" class="form-control" id="newsletter-email"
+                    placeholder="esim@esimerkki.com">
+                  <div class="col-auto" style="padding-left: 0; padding-top: 5px;">
+                    <button id="newsbtn" type="submit" style="background-color: #438975;"
+                      class="btn btn-secondary mb-3">Tilaa</button>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+          <!-- Kolmas sarake: Kuva -->
+          <div class="col-lg-4 col-md-12 order-lg-3">
+            <div class="d-flex justify-content-end">
+              <img id="lettersdog" src="photos/newsletterdog.png" alt="Kuva 5">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ajankohtaista-page" class="view">
+    <div class="container">
+      <div class="row justify-content-center">
+        <h1>Ajankohtaista</h1>
+      </div>
+      <div class="card-container justify-content-center">
+        <h2>Uutuuksia, blogikirjoituksia, tietoa lemmikkiteknologian teemoihin
+          liittyvistä asioista ja tapahtumista.</h2>
+
+        <!-- Lokero 1: Uusi älypanta Petpuls -->
+        <div class="card mx-auto" id="productPetpuls">
+          <div class="card-body">
+            <h5 class="card-title">Uusi älypanta Petpuls tulkitsee koiran mielialoja
+            </h5>
+            <hr>
+            <span class="float-right">23.2.2024</span>
+            <p class="card-subtitle mb-2 text-muted">Kategoria: Tuotteet | Teveydenseuranta</p>
+            <img src="photos/Ajankohtaista ja Tuotteet/2.png" alt="Kuva 4">
+            <p class="card-text">Petpuls on Eteläkorealaisen teknologiayhtiön kehittämä älypanta, joka toimii
+              maailman ensimmäisenä koiran tunteita tulkitsevana laitteena. Panta hyödyntää edistyksellistä
+              tekoälyä ja algoritmeja, jotka analysoivat yli 10 000 koiran haukuntaääntä, luoden kategoriat kuten
+              ilo, suru, ahdistus ja viha. </p>
+            <p style="color: #989696;">Kuva: <a href="https://www.petpuls.net/buy?lang=en"
+                target="_blank">https://www.petpuls.net/buy?lang=en</a></p>
+
+            <a href="#" class="btn btn-secondary nav-link product-details-btn"
+              style="width: 120px; margin-top: 1rem; padding: 1%; color: aliceblue;" data-product="PetPuls -älypanta"
+              data-view="tuotteet-page"
+              onclick="showView('tuotteet-page'); showProductDetails('PetPuls -älypanta');">Tuotesivulle</a>
+          </div>
+        </div>
+        <!-- Lokero 2: Lemmikkien teknologiset edistysaskeleet -->
+        <div class="card mx-auto">
+          <div class="card-body">
+            <h5 class="card-title">Lemmikkien teknologiset edistysaskeleet: Ystävä vai vieras?
+            </h5>
+            <hr>
+            <span class="float-right">18.2.2024</span>
+            <p class="card-subtitle mb-2 text-muted">Kategoria: Blogi</p>
+            <img src="photos/labbisphoto.jpg" alt="Kuva 4">
+            <p class="card-text">Lemmikkeihin suunnatut teknologiset edistysaskeleet herättävät kiinnostusta, kun
+              omistajille tarjotaan uusia tapoja ymmärtää ja hoitaa rakkaita karvaisia perheenjäseniään. Älykkäät
+              koiranpannat antavat mahdollisuuden tulkita lemmikin tunnetiloja ja seurata niiden terveyttä
+              reaaliajassa. </p>
+
+            <div id="lisateksti1" style="display:none;">
+              <p>Toisaalta, on tärkeää ottaa huomioon myös teknologian haitat.</p>
+              <p>Yksityisyyden huoli nousee esiin, kun jatkuvaa seurantaa pidetään mahdollisena loukkauksena
+                lemmikin henkilökohtaisuudelle. Tekniset häiriöt voivat aiheuttaa epätarkkoja tietoja ja asettaa
+                kyseenalaiseksi teknologian luotettavuuden.</p>
+
+              <p>On myös pelko siitä, että teknologian liiallinen käyttö voi johtaa omistajien riippuvuuteen
+                laitteista, vähentäen luonnollista vuorovaikutusta lemmikin kanssa. Jatkuvan seurannan sijaan on
+                tärkeää löytää tasapaino teknologian ja perinteisen lemmikinhoivan välillä.</p>
+
+              <p>Lemmikkiin kohdistuvat teknologiset innovaatiot avaavat oven uusiin mahdollisuuksiin, mutta
+                samalla ne vaativat harkittua käyttöä ja tietoisuutta niiden vaikutuksista lemmikin ja omistajan
+                väliseen suhteeseen.</p>
+
+              <h6>Miten sinä suhtaudut lemmikkien teknologiaan? Onko se sinulle ystävä vai vieras?</h6>
+              <p>Lemmikkeihin kohdistuvat teknologiset innovaatiot ovat viime vuosina ottaneet harppauksia
+                eteenpäin, tarjoten omistajille uusia tapoja ymmärtää ja huolehtia karvaisista ystävistään. Näiden
+                teknologioiden hyödyt ja haitat herättävät kuitenkin keskustelua.</p>
+
+              <h6>Hyödyt:</h6>
+              <ul>
+                <li>Seuranta ja Terveystiedot: Älykkäät koiranpannat mahdollistavat lemmikin käyttäytymisen,
+                  terveyden ja tunnetilojen seurannan reaaliaikaisesti. Tämä antaa omistajille arvokasta tietoa
+                  lemmikin hyvinvoinnista.</li>
+                <li>Etävalvonta: Lemmikkien kamera- ja älylaitteet tarjoavat omistajille mahdollisuuden tarkkailla
+                  lemmikin kotonaoloaikaa ja varmistaa niiden turvallisuuden etäältä. Etävalvontakamerat tarjoavat
+                  omistajille mielenrauhaa, kun he voivat seurata lemmikin
+                  kotonaoloa etänä, ja älykkäät lemmikinlelut pitävät lemmikin virkeänä.</li>
+                <li>Aktiivisuusseuranta: Älykkäät lemmikinlelut ja liikuntaseurantalaitteet auttavat pitämään
+                  lemmikin aktiivisena ja tarjoavat omistajille tietoa päivittäisestä liikkumisesta.</li>
+              </ul>
+
+              <h6>Haitat:</h6>
+              <ul>
+                <li>Yksityisyyden huoli: Jotkut omistajat voivat olla huolissaan siitä, että teknologiat
+                  loukkaavat lemmikin yksityisyyttä. Jatkuva seuranta ja valvonta voivat tuntua liiallisilta.</li>
+                <li>Tekninen häiriö: Teknologiset laitteet eivät ole täysin virheettömiä, ja tekniset häiriöt
+                  voivat aiheuttaa vääriä tietoja tai laitteen toimintahäiriöitä.</li>
+                <li>Riippuvuus: Liiallinen luottaminen teknologiaan saattaa vähentää omistajan luonnollista
+                  vuorovaikutusta lemmikin kanssa. Se saattaa myös estää omistajaa lukemasta lemmikin tarpeita
+                  intuitiivisesti.</li>
+              </ul>
+              <p style="color: #989696;">Teksti ja kuva: ChatGPT</p>
+            </div>
+
+            <button id="lueLisaaNappi1" class="btn btn-secondary">Lue lisää</button>
+          </div>
+
+        </div>
+
+        <!-- Lokero 3: Pidentyykö lemmikkien elinaika terveysteknologian avulla? -->
+        <div class="card mx-auto">
+          <div class="card-body">
+            <h5 class="card-title">Pidentyykö lemmikkien elinaika terveysteknologian avulla?
+            </h5>
+            <hr>
+            <span class="float-right">17.1.2024</span>
+            <p class="card-subtitle mb-2 text-muted">Kategoria: Blogi</p>
+            <img src="photos/dogphoto.jpg" alt="Kuva 4">
+            <p class="card-text">Lemmikkien terveysteknologiat ovat viime aikoina kehittyneet huimasti, tarjoten
+              omistajille mahdollisuuden entistä parempaan huolenpitoon karvaisista perheenjäsenistämme. Mutta
+              voivatko nämä teknologiset edistysaskeleet todella pidentää lemmikkien elinaikaa?</p>
+
+            <div id="lisateksti" style="display:none;">
+              <h6>Ennakoiva terveysseuranta:</h6>
+              <p>Älykkäät lemmikinseurantalaitteet mahdollistavat omistajille ennakoivan terveysseurannan.
+                Esimerkiksi älykäs koiranpanta voi tulkita lemmikin käyttäytymistä ja antaa varoitusmerkkejä
+                mahdollisista terveysongelmista. Tämä varhainen havaitseminen voi johtaa ajoissa saatavaan
+                hoitoon, mikä voi vaikuttaa positiivisesti lemmikin elinikään.</p>
+
+              <h6>Virtuaalinen terveyskonsultaatio</h6>
+              <p>Teknologia mahdollistaa myös virtuaaliset terveyskonsultaatiot lemmikeille. Etänä toimivat
+                eläinlääkärit voivat antaa arvokkaita neuvoja ja diagnosoida terveysongelmia omistajien ollessa
+                kotonaan. Tämä nopea ja helppo pääsy asiantuntija-apuun voi auttaa ylläpitämään lemmikin
+                terveyttä.</p>
+
+              <h6>Ravinneseuranta ja älyruokinta</h6>
+              <p>Älykkäät ruokintaratkaisut mahdollistavat tarkan ravinneseurannan ja personoidun ruokavalion
+                lemmikeille. Oikeanlaisen ravinnon tarjoaminen voi vaikuttaa lemmikin terveyteen ja elinikään.
+                Älyruokinta-automaatit voivat myös varmistaa säännöllisen ja tasapainoisen ruokailun.</p>
+
+              <h6>Liikunta- ja aktiivisuusseuranta</h6>
+              <p>Älykkäät lemmikinlelut ja liikuntaseurantalaitteet auttavat omistajia pitämään lemmikkinsä
+                aktiivisina ja terveinä. Säännöllinen liikunta on tunnetusti yksi elämänlaatua ja elinikää
+                parantavista tekijöistä myös lemmikeille.</p>
+
+              <p style="color: #989696;">Teksti ja kuva: ChatGPT</p>
+            </div>
+
+            <button id="lueLisaaNappi" class="btn btn-secondary">Lue lisää</button>
+          </div>
+        </div>
+
+        <!-- Lokero 4: Uutuus kissojen seurantaan: Tractive GPS Tracker for Cats -->
+        <div class="card mx-auto">
+          <div class="card-body">
+            <h5 class="card-title">Uutuus kissojen seurantaan: Tractive GPS Tracker for Cats
+            </h5>
+            <hr>
+            <span class="float-right">5.1.2024</span>
+            <p class="card-subtitle mb-2 text-muted">Kategoria: Tuotteet | Valvontalaitteet</p>
+            <img src="photos/Ajankohtaista ja Tuotteet/cattrack.png" alt="Kuva 4">
+            <p class="card-text">Tractive GPS Tracker for Cats -laitteen on kehittänyt Tractive GmbH, Itävallasta
+              kotoisin oleva yritys, joka on erikoistunut lemmikkieläinten seurantalaitteiden ja muiden lemmikkiin
+              liittyvien teknologisten ratkaisujen kehittämiseen.</p>
+
+            <p style="color: #989696;">Kuva: https://tractive.com/en/pd/gps-tracker-cat</p>
+            <a href="#" class="btn btn-secondary" data-view="tuotteet-page"
+              onclick="showView('tuotteet-page'); showProductDetails('Tractive GPS Tracker for Cats');">Tuotesivulle</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Tuotteet näkymä-->
+  <div id="tuotteet-page" class="view justify-content-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>Tuotteet</h1>
+        </div>
+      </div>
+      <div class="btn-group mb-3 flex-wrap" role="group">
+        <button id="kaikkibtn" class="btn btn-secondary active category-btn" data-category="kaikki">Kaikki</button>
+        <button class="btn btn-secondary category-btn" data-category="ruokintalaitteet">Ruokintalaitteet</button>
+        <button class="btn btn-secondary category-btn" data-category="terveydenseuranta">Terveydenseuranta</button>
+        <button class="btn btn-secondary category-btn" data-category="valvontalaitteet">Valvontalaitteet</button>
+        <button class="btn btn-secondary category-btn" data-category="lelut">Lelut</button>
+        <button class="btn btn-secondary category-btn" data-category="muut">Muut</button>
+      </div>
+
+      <div class="card-container">
+        <div class="row flex-wrap" id="tuote-kortit">
+
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
+            <a href="#" class="card card-link" data-category="terveydenseuranta"
+              onclick="showProductDetails('PetPuls -älypanta')">
+              <div class="card-body">
+                <p>UUSI</p>
+                <h5 class="card-title">PetPuls -älypanta</h5>
+                <img src="photos/Ajankohtaista ja Tuotteet/3.png">
+              </div>
+            </a>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
+            <a href="#" class="card card-link" data-category="ruokintalaitteet">
+              <div class="card-body">
+                <br>
+                <h5 class="card-title">Petnet SmartFeeder</h5>
+                <img src="photos/Ajankohtaista ja Tuotteet/1.png">
+              </div>
+            </a>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
+            <a href="#" class="card card-link" data-category="ruokintalaitteet">
+              <div class="card-body">
+                <br>
+                <h5 class="card-title">Catit Pixi Smart -vesiautomaatti</h5>
+                <img src="photos/Ajankohtaista ja Tuotteet/4.png">
+              </div>
+            </a>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
+            <a href="#" class="card card-link" data-category="lelut">
+              <div class="card-body">
+                <br>
+                <h5 class="card-title">PetCube Bites 2</h5>
+                <img src="photos/Ajankohtaista ja Tuotteet/5.png">
+              </div>
+            </a>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
+            <a href="#" class="card card-link" data-category="lelut">
+              <div class="card-body">
+                <br>
+                <h5 class="card-title">PetSafe® FroliCat® Bolt Laser -kissanlelu</h5>
+                <img src="photos/Ajankohtaista ja Tuotteet/6.png">
+              </div>
+            </a>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
+            <a href="#" class="card card-link" data-category="valvontalaitteet"
+              onclick="showProductDetails('Tractive GPS Tracker for Cats')">
+              <div class="card-body">
+                <br>
+                <h5 class="card-title">Tractive GPS Tracker for Cats</h5>
+                <img id="cat-pict" src="photos/Ajankohtaista ja Tuotteet/cattrack.png">
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div id="muut-info" style="margin-left: 40px; display: none;" data-category="muut">
+          <p>Tässä kategoriassa ei ole tuotteita.</p>
+        </div>
+
+
+        <div id="tuote-tiedot" class="card">
+          <p id="tuote-uusi" style="display: block;">UUSI</p>
+          <h2 id="tuote-nimi" class="card-title"></h2>
+          <img id="tuote-kuva">
+          <p id="tuote-kuvaus" class="card-text"></p>
+          <p id="tuote-ominaisuudet"></p>
+          <img id="tuote-kuva2">
+          <iframe id="video" frameborder="0" allowfullscreen></iframe>
+          <p id="tuote-lähde"></p>
+          <br>
+          <button id="takaisin-btn" onclick="hideProductDetails()">Takaisin</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="yritykset-page" class="view">
+    <div class="container">
+      <div class="row justify-content-center">
+        <h1>Yritykset</h1>
+      </div>
+      <div class="card-container">
+        <div class="content">
+          <div class="text-and-image">
+            <h5>Täällä päääset tutustumaan yrityksiin, jotka tarjoavat erilaisia tuotteita ja palveluita parantamaan
+              lemmikkieläinten elämänlaatua ja helpottamaan omistajien arkea.</h5>
+            <img src="photos/dogandtwocats.png" alt="Kuva" class="right">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <br><br>
+          <h6>Pääset painikkeesta klikkaamalla kyseisen yrityksen nettisivuille. Yrityksiä, jotka kehittävät erilaisia
+            lemmikkiteknologioita:</h6>
+        </div>
+
+        <div class="row justify-content-center">
+
+          <div class="card mx-auto">
+            <div class="card-body">
+              <h5 class="card-title">Petcube</h5>
+              <p class="card-text">Tarjoaa älykkäitä kameroita, jotka mahdollistavat lemmikkieläinten seurannan ja
+                vuorovaikutuksen etänä.</p>
+              <a href="https://petcube.com/" class="btn btn-secondary float-right" target="_blank">Yrityksen sivuille
+                <span class="arrow-right"></span></a>
+            </div>
+          </div>
+
+          <div class="card mx-auto">
+            <div class="card-body">
+              <h5 class="card-title">Fitbark</h5>
+              <p class="card-text">Tarjoaa aktiivisuusseurantaa lemmikkieläimille.</p>
+              <a href="https://www.fitbark.com/en-GB" class="btn btn-secondary float-right" target="_blank">Yrityksen
+                sivuille
+                <span class="arrow-right"></span></a>
+            </div>
+          </div>
+
+          <div class="card mx-auto">
+            <div class="card-body">
+              <h5 class="card-title">Pawbo (Acer)</h5>
+              <p class="card-text">Tarjoaa älykkäitä tuotteita, kuten interaktiivisia kameroita ja leluja
+                lemmikkieläimille.</p>
+              <a href="https://www.pawbopet.com/us/about-us/" class="btn btn-secondary float-right"
+                target="_blank">Yrityksen sivuille <span class="arrow-right"></span></a>
+            </div>
+          </div>
+
+          <div class="card mx-auto">
+            <div class="card-body">
+              <h5 class="card-title">Tractive</h5>
+              <p class="card-text">Yritys tarjoaa koirille ja kissoille GPS+ terveysvahtilaitteita.</p>
+              <a href="https://tractive.com/" class="btn btn-secondary float-right" target="_blank">Yrityksen sivuille
+                <span class="arrow-right"></span></a>
+            </div>
+          </div>
+
+          <div class="card mx-auto">
+            <div class="card-body">
+              <h5 class="card-title">Mars Incorporated</h5>
+              <p class="card-text">Yksi johtavista yrityksistä lemmikkiteknologian alalla.</p>
+              <a href="https://www.mars.com/" class="btn btn-secondary float-right" target="_blank">Yrityksen sivuille
+                <span class="arrow-right"></span></a>
+            </div>
+          </div>
+
+          <div class="card mx-auto">
+            <div class="card-body">
+              <h5 class="card-title">Garmin International</h5>
+              <p class="card-text">Tarjoaa laajan valikoiman GPS-teknologiaan perustuvia tuotteita, mukaan lukien
+                lemmikkieläinten seurantalaitteita.</p>
+              <a href="https://www.garmin.com/en-US/" class="btn btn-secondary float-right" target="_blank">Yrityksen
+                sivuille
+                <span class="arrow-right"></span></a>
+            </div>
+          </div>
+
+          <div class="card mx-auto">
+            <div class="card-body">
+              <h5 class="card-title">Nedap</h5>
+              <p class="card-text">Hollantilainen yritys, joka tarjoaa älykkäitä ratkaisuja lemmikkieläinten hallintaan.
+              </p>
+              <a href="https://nedap.com/" class="btn btn-secondary float-right" target="_blank">Yrityksen sivuille
+                <span class="arrow-right"></span></a>
+            </div>
+          </div>
+
+          <div class="card mx-auto">
+            <div class="card-body">
+              <h5 class="card-title">Wagz</h5>
+              <p class="card-text">Yritys, joka tarjoaa älykkäitä tuotteita, kuten älykkäitä kaulapantoja ja älykkäitä
+                ruokintalaitteita.</p>
+              <a href="https://wagz.com/" class="btn btn-secondary float-right" target="_blank">Yrityksen sivuille <span
+                  class="arrow-right"></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--TAUSTATOIMINTA NÄKYMÄ-->
+  <div id="taustatoiminta-page" class="view">
+    <div class="container">
+      <h1>Taustatoiminta</h1>
+      <div class="card-container">
+        <div class="row">
+          <div class="col-md-6 order-1">
+            <div class="card">
+              <div class="card-body">
+                <h2>Sivuston taustajoukot</h2>
+                <p>PetTechNow taustalla vaikuttaa yksin tietojenkäsittelytradenomi -opiskelija ja eläinhoitaja Essi
+                  Esimerkki. Tekoälyllä tuotettujen kuvien generoinnissa on toiminut toinen henkilö apuna, johtuen
+                  siitä, ettei ylläpitäjällä itsellä ole tilausta kuvagenerointipalveluun. Sivustoa ylläpidetään ja
+                  dataa tuotetaan kuitenkin pääosin yhden ihmisen voimin, tekoälyä apuna käyttäen.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 order-2">
+            <img src="photos/Ajankohtaista ja Tuotteet/tausta2.jpg" class="card-img-top" alt="Kuva">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 order-md-3 order-4">
+            <img src="photos/Ajankohtaista ja Tuotteet/tausta1.jpg" class="card-img-top" alt="Kuva">
+          </div>
+          <div class="col-md-6 order-md-4 order-3">
+            <div class="card">
+              <div class="card-body">
+                <h2>Miksi sivusto on perustettu?</h2>
+                <p>Sivusto on perustettu Web- ja mobiilikäyttöliittymät kurssia varten ja sen toteuttamisessa on
+                  mietitty hyvin vahvasti responsiivisuutta, saavutettavuutta, sekä yleisiä hyvän käyttöliittymän
+                  periaatteita. Aihe sivuston valintaan lähti harrastuneisuudesta ja ammattitaidosta eläimiä kohtaan,
+                  sekä vahvasta kiinnostuksesta teknologiaa kohtaan. PetTechNow on yhdistelmä näitä asioita.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <h2>Sivuston tuotteiden valinta</h2>
+                <p>Tuotteet ja ratkaisut jotka sivustolle valitaan, on hyvin sattumanvaraista, eikä valintaan kohdistu
+                  minkäänlaista kaupallista tai muutakaan yhteistyötä yritysten välille. Tuotteet valitaan mielenkiinnon
+                  ja hakutulosten mukaan ja sivusto pyrkii ajan myötä laajentamaan tuotteiden esittelykatalogia.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam accumsan velit sit amet elit
+                  sollicitudin, eu sagittis odio condimentum. Pellentesque habitant morbi tristique senectus et netus et
+                  malesuada fames ac turpis egestas. Integer interdum, lectus eget laoreet convallis, nunc est efficitur
+                  velit, a condimentum lacus ipsum vel metus. Suspendisse potenti. Vivamus eget nisi ac ligula aliquam
+                  ultrices. Aliquam erat volutpat. Sed eget justo ac sapien vehicula consequat. Integer at ex eget enim
+                  fringilla auctor. Sed et diam id augue elementum pharetra. Curabitur dapibus hendrerit libero, et
+                  malesuada eros fermentum id. Vivamus vel nisl nunc. Sed congue justo a orci auctor, ac viverra ante
+                  volutpat. Sed nec velit est. Phasellus ut malesuada lorem. Sed nec odio vel dolor sollicitudin
+                  finibus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam accumsan velit sit amet elit
+                  sollicitudin, eu sagittis odio condimentum. Pellentesque habitant morbi tristique senectus et netus et
+                  malesuada fames ac turpis egestas. Integer interdum, lectus eget laoreet convallis, nunc est efficitur
+                  velit, a condimentum lacus ipsum vel metus. Suspendisse potenti. Vivamus eget nisi ac ligula aliquam
+                  ultrices. Aliquam erat volutpat. Sed eget justo ac sapien vehicula consequat. Integer at ex eget enim
+                  fringilla auctor. Sed et diam id augue elementum pharetra. Curabitur dapibus hendrerit libero, et
+                  malesuada eros fermentum id. Vivamus vel nisl nunc. Sed congue justo a orci auctor, ac viverra ante
+                  volutpat. Sed nec velit est. Phasellus ut malesuada lorem. Sed nec odio vel dolor sollicitudin
+                  finibus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam accumsan velit sit amet elit
+                  sollicitudin, eu sagittis odio condimentum. Pellentesque habitant morbi tristique senectus et netus et
+                  malesuada fames ac turpis egestas. Integer interdum, lectus eget laoreet convallis, nunc est efficitur
+                  velit, a condimentum lacus ipsum vel metus. Suspendisse potenti. Vivamus eget nisi ac ligula aliquam
+                  ultrices. Aliquam erat volutpat. Sed eget justo ac sapien vehicula consequat. Integer at ex eget enim
+                  fringilla auctor. Sed et diam id augue elementum pharetra. Curabitur dapibus hendrerit libero, et
+                  malesuada eros fermentum id. Vivamus vel nisl nunc. Sed congue justo a orci auctor, ac viverra ante
+                  volutpat. Sed nec velit est. Phasellus ut malesuada lorem. Sed nec odio vel dolor sollicitudin
+                  finibus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam accumsan velit sit amet elit
+                  sollicitudin, eu sagittis odio condimentum. Pellentesque habitant morbi tristique senectus et netus et
+                  malesuada fames ac turpis egestas. Integer interdum, lectus eget laoreet convallis, nunc est efficitur
+                  velit, a condimentum lacus ipsum vel metus. Suspendisse potenti. Vivamus eget nisi ac ligula aliquam
+                  ultrices. Aliquam erat volutpat. Sed eget justo ac sapien vehicula consequat. Integer at ex eget enim
+                  fringilla auctor. Sed et diam id augue elementum pharetra. Curabitur dapibus hendrerit libero, et
+                  malesuada eros fermentum id. Vivamus vel nisl nunc. Sed congue justo a orci auctor, ac viverra ante
+                  volutpat. Sed nec velit est. Phasellus ut malesuada lorem. Sed nec odio vel dolor sollicitudin
+                  finibus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam accumsan velit sit amet elit
+                  sollicitudin, eu sagittis odio condimentum. Pellentesque habitant morbi tristique senectus et netus et
+                  malesuada fames ac turpis egestas. Integer interdum, lectus eget laoreet convallis, nunc est efficitur
+                  velit, a condimentum lacus ipsum vel metus. Suspendisse potenti. Vivamus eget nisi ac ligula aliquam
+                  ultrices. Aliquam erat volutpat. Sed eget justo ac sapien vehicula consequat. Integer at ex eget enim
+                  fringilla auctor. Sed et diam id augue elementum pharetra. Curabitur dapibus hendrerit libero, et
+                  malesuada eros fermentum id. Vivamus vel nisl nunc. Sed congue justo a orci auctor, ac viverra ante
+                  volutpat. Sed nec velit est. Phasellus ut malesuada lorem. Sed nec odio vel dolor sollicitudin
+                  finibus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam accumsan velit sit amet elit
+                  sollicitudin, eu sagittis odio condimentum. Pellentesque habitant morbi tristique senectus et netus et
+                  malesuada fames ac turpis egestas. Integer interdum, lectus eget laoreet convallis, nunc est efficitur
+                  velit, a condimentum lacus ipsum vel metus. Suspendisse potenti. Vivamus eget nisi ac ligula aliquam
+                  ultrices. Aliquam erat volutpat. Sed eget justo ac sapien vehicula consequat. Integer at ex eget enim
+                  fringilla auctor. Sed et diam id augue elementum pharetra. Curabitur dapibus hendrerit libero, et
+                  malesuada eros fermentum id. Vivamus vel nisl nunc. Sed congue justo a orci auctor, ac viverra ante
+                  volutpat. Sed nec velit est. Phasellus ut malesuada lorem. Sed nec odio vel dolor sollicitudin
+                  finibus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="yhteystiedot-page" class="view">
+    <div class="container">
+      <div class="card-container">
+        <h1>Yhteystiedot</h1>
+        <div class="row">
+          <div class="card card-body col-md-6">
+            <div>
+              <br>
+              <h6>Yhteystiedot</h6>
+              <p><i class="bi bi-person"></i> Essi Esimerkki</p>
+              <p><i class="bi bi-telephone"></i> puh. 012 3456789</p>
+              <p><i class="bi bi-envelope"></i> kuviteltusposti@gmail.com</p>
+              <br>
+              <h6>Osoite</h6>
+              <p><i class="bi bi-geo-alt"></i> Kauppakatu 1</p>
+              <p style="margin-left: 25px;">40100 Jyväskylä</p>
+              <p style="margin-left: 25px;">Finland</p>
+            </div>
+          </div>
+          <div class="card card-body col-md-6" id="map">
+          </div>
+          <br>
+          <div class="row">
+            <!-- Yhteydenottolomake Bootstrapilla -->
+            <form id="yhteydenottolomake">
+              <h6>Ota yhteyttä, anna palautetta tai kehitysehdotuksia lomakkeella.</h6>
+              <div class="mb-3">
+                <label for="nimi" class="form-label">Nimesi:</label>
+                <input type="text" class="form-control" id="nimi" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Sähköpostisi:</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="viesti" class="form-label">Viesti:</label>
+                <textarea class="form-control" id="viesti" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Lähetä</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <!-- Vasen puoli -->
+      <div class="col-md-6">
+        <div><br>
+          <h6>Yhteystiedot</h6>
+          <p><i class="bi bi-person"></i> Essi Esimerkki</p>
+          <p><i class="bi bi-telephone"></i> puh. 012 3456789</p>
+          <p><i class="bi bi-envelope"></i> pettech@now.com</p><br>
+          <h6>Osoite</h6>
+          <p><i class="bi bi-geo-alt"></i> Kauppakatu 1</p>
+          <p style="margin-left: 25px;">40100 Jyväskylä</p>
+          <p style="margin-left: 25px;"> Finland</p><br>
+        </div>
+      </div>
+
+      <!-- Somet ja uutiskirjeen peruutus -->
+      <div class="col-md-6">
+        <div><br>
+          <h6>Sosiaalinen media</h6>
+          <p><i class="bi bi-instagram"></i> #pettechnow (tulossa pian)</p>
+          <p><i class="bi bi-facebook"></i> PetTechNow (tulossa pian)</p>
+        </div>
+        <div><br><br><br>
+          <h6>Uutiskirjeen peruutus</h6>
+          <form>
+            <p><i class="bi bi-envelope"></i>Sähköpostisi</p>
+            <div class="form-group row">
+              <input style="width: 250px; margin-left: 15px;" type="email" class="form-control" id="newsletter-email"
+                placeholder="esim@esimerkki.com">
+          </form>
+        </div>
+      </div>
+      <button id="newsbtn" type="submit" class="btn btn-secondary mb-3">Peruuta</button>
+    </div>
+  </div>
+
+  <p>2024 PetTechNow</p>
+  <p><i class="bi bi-lock"></i> Kaikki oikeudet pidätetään.</p>
+  </div>
+
+  </div>
+</footer>
+
+
+</html>
