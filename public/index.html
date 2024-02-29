@@ -13,6 +13,11 @@
   <!-- Font Awesome CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  
   <title>PetTechNow -Etusivu</title>
 
   <script src="script.js" defer></script>
@@ -148,7 +153,7 @@
 
 
     <!-- ALEMPI NAVIPALKKI -->
-    <nav id="lowerNav" class="navbar navbar-expand-lg navbar-light">
+    <nav id="lowerNav" class="navbar navbar-expand-lg navbar-light custom-navbar">
       <div class="container-fluid">
         <span class="navbar-text d-lg-none">
           <a id="active-Name" href="#" class="active-page-link" onclick="showView('etusivu')">Etusivu</a>
@@ -164,51 +169,49 @@
           <ul class="navbar-nav mx-auto" style="text-align: center">
             <li class="nav-item">
               <a id="etusivu-link" class="nav-link" href="#" onclick="showView('etusivu-page')"
-                data-view="etusivu-page">Etusivu</a>
-              <span class="nav-divider">|</span>
+                data-view="etusivu-page">ETUSIVU</a>
+         
             </li>
             <li class="nav-item">
               <a id="ajankohtaista-link" class="nav-link" href="#" onclick="showView('ajankohtaista-page')"
-                data-view="ajankohtaista-page">Ajankohtaista</a>
-              <span class="nav-divider">|</span>
+                data-view="ajankohtaista-page">AJANKOHTAISTA</a>
+             
             </li>
             <li class="nav-item dropdown">
               <a id="tuotteet-link" class="nav-link dropdown-toggle" onclick="showView('tuotteet-page')"
                 data-view="tuotteet-page" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                Tuotteet
+                TUOTTEET
               </a>
-              <span class="nav-divider">|</span>
               <div class="dropdown-menu" style="background-color: lightgrey; border: 0px">
                 <a id="kaikki-tuotteet-link" class="dropdown-item" href="#" style="color: #333"
-                  onclick="showView('kaikki-page')" data-view="kaikki">Kaikki tuotteet</a>
+                  onclick="showView('kaikki-page')" data-view="kaikki">KAIKKI TUOTTEET</a>
                 <a id="ruokintalaitteet-link" class="dropdown-item" href="#" style="color: #333"
-                  onclick="showView('ruokintalaitteet-page')" data-view="ruokintalaitteet">Ruokintalaitteet</a>
+                  onclick="showView('ruokintalaitteet-page')" data-view="ruokintalaitteet">RUOKINTALAITTEET</a>
                 <a id="terveydenseuranta-link" class="dropdown-item" href="#" style="color: #333"
-                  onclick="showView('terveydenseuranta-page')" data-view="terveydenseuranta">Terveydenseuranta</a>
+                  onclick="showView('terveydenseuranta-page')" data-view="terveydenseuranta">TERVEYDENSEURANTA</a>
                 <a id="valvontalaitteet-link" class="dropdown-item" href="#" style="color: #333"
-                  onclick="showView('valvontalaitteet-page')" data-view="valvontalaitteet">Valvontalaitteet</a>
+                  onclick="showView('valvontalaitteet-page')" data-view="valvontalaitteet">VALVONTALAITTEET</a>
                 <a id="lelut-link" class="dropdown-item" href="#" style="color: #333" onclick="showView('lelut-page')"
-                  data-view="lelut">Lelut</a>
+                  data-view="lelut">LELUT</a>
 
                 <a id="muut-link" class="dropdown-item" href="#" style="color: #333" onclick="showView('muut-page')"
-                  data-view="muut">Muut</a>
+                  data-view="muut">MUUT</a>
               </div>
             </li>
             <li class="nav-item">
               <a id="yritykset-link" class="nav-link" href="#" onclick="showView('yritykset-page')"
-                data-view="yritykset-page">Yritykset</a>
-              <span class="nav-divider">|</span>
+                data-view="yritykset-page">YRITYKSET</a>
             </li>
             <li class="nav-item">
               <a id="taustatoiminta-link" class="nav-link" href="#" onclick="showView('taustatoiminta-page')"
-                data-view="taustatoiminta-page">Taustatoiminta</a>
-              <span class="nav-divider">|</span>
+                data-view="taustatoiminta-page">TAUSTATOIMINTA</a>
+         
             </li>
             <li class="nav-item">
               <a id="yhteystiedot-link" class="nav-link" href="#" onclick="showView('yhteystiedot-page')"
-                data-view="yhteystiedot-page">Yhteystiedot</a>
-              <span class="nav-divider">|</span>
+                data-view="yhteystiedot-page">YHTEYSTIEDOT</a>
+              
             </li>
 
           </ul>
@@ -640,8 +643,8 @@
       <div class="card-container">
         <div class="content">
           <div class="text-and-image">
-            <h5>Täällä päääset tutustumaan yrityksiin, jotka tarjoavat erilaisia tuotteita ja palveluita parantamaan
-              lemmikkieläinten elämänlaatua ja helpottamaan omistajien arkea.</h5>
+            <h2>Täällä päääset tutustumaan yrityksiin, jotka tarjoavat erilaisia tuotteita ja palveluita parantamaan
+              lemmikkieläinten elämänlaatua ja helpottamaan omistajien arkea.</h2>
             <img src="photos/dogandtwocats.png" alt="Kuva" class="right">
           </div>
         </div>

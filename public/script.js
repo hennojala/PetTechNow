@@ -1,7 +1,7 @@
 // Funktio vaalean teeman asettamiseksi
 function setLightTheme() {
   document.body.style.backgroundColor = "#edffff";
-  document.body.style.color = "black"; 
+  document.body.style.color = "black";
   document.querySelector(".navbar").style.backgroundColor = "#edffff";
   document.querySelectorAll(".nav-link").forEach(function (link) {
     link.style.color = "black";
@@ -20,22 +20,22 @@ function setLightTheme() {
   document
     .querySelectorAll(".card-container:not(#yhteystiedot-page .card-container)")
     .forEach(function (container) {
-      container.style.backgroundColor = "#c6d6d4"; // Aseta haluamasi tummempi väri
+      container.style.backgroundColor = "#c6d6d4"; 
     });
 
   var cards = document.querySelectorAll(".card");
 
   cards.forEach(function (card) {
-    card.style.backgroundColor = "#edffff"; 
+    card.style.backgroundColor = "white";
   });
 
   var buttons = document.querySelectorAll("button");
   buttons.forEach(function (button) {
-    button.style.backgroundColor = "transparent"; 
+    button.style.backgroundColor = "transparent";
     button.style.color = "#1E2F2D";
   });
   document.getElementById("banner").src = "photos/banneri.png";
-  document.getElementById("lowerNav").style.backgroundColor = "#cbe0de";
+  document.getElementById("lowerNav").style.backgroundColor = "#9accd1";
   document.getElementById("topNav").style.backgroundColor = "#edffff";
   document.getElementById("newsletter").style.color = "#052b14";
   document.getElementById("newsletter").style.backgroundColor = "#b9cbca";
@@ -61,20 +61,19 @@ function setDarkTheme() {
   var buttons = document.querySelectorAll("button");
   buttons.forEach(function (button) {
     button.style.backgroundColor = "#94ABA8";
-    button.style.color = "black";
+    button.style.color = "darkgray";
   });
 
   document
     .querySelectorAll(".card-container:not(#yhteystiedot-page .card-container)")
     .forEach(function (container) {
-      container.style.backgroundColor = "#050706"; 
+      container.style.backgroundColor = "#050706";
     });
 
   var cards = document.querySelectorAll(".card");
 
-
   cards.forEach(function (card) {
-    card.style.backgroundColor = "#7AA6A4"; 
+    card.style.backgroundColor = "#7AA6A4";
   });
 
   document.querySelector("footer").style.backgroundColor = "#050706";
@@ -142,7 +141,7 @@ window.addEventListener("load", checkFontSize); // Varmuuden vuoksi lisätään 
 function checkFontSize() {
   var savedFontSize = localStorage.getItem("fontSize");
   if (savedFontSize) {
-    document.body.style.fontSize = savedFontSize + "px"; 
+    document.body.style.fontSize = savedFontSize + "px";
   }
 }
 
@@ -226,15 +225,17 @@ document.addEventListener("DOMContentLoaded", function () {
       navLinks.forEach(function (link) {
         if (link !== navLink) {
           link.classList.remove("active");
-          link.style.fontWeight = "normal";
+          link.style.fontWeight = "700";
           link.style.textDecoration = "none";
+          link.style.backgroundColor = "transparent";
         }
       });
 
       // Lisää boldaus ja alleviivaus valittuun linkkiin
       navLink.classList.add("active");
-      navLink.style.fontWeight = "bold";
+      navLink.style.fontWeight = "800";
       navLink.style.textDecoration = "underline";
+      navLink.style.backgroundColor = "#B8C7C8";
 
       // Päivitä aktiivinen sivun nimi pienellä viiveellä
       setTimeout(updateActivePageLink, 100);
@@ -395,13 +396,13 @@ mainProductsLink.addEventListener("click", function () {
   // Poista boldaus ja alleviivaus kaikista muista linkeistä
   navLinks.forEach(function (link) {
     link.classList.remove("active");
-    link.style.fontWeight = "normal";
+    link.style.fontWeight = "700";
     link.style.textDecoration = "none";
   });
 
   // Lisää boldaus ja alleviivaus pääotsikon linkkiin
   mainProductsLink.classList.add("active");
-  mainProductsLink.style.fontWeight = "bold";
+  mainProductsLink.style.fontWeight = "800";
   mainProductsLink.style.textDecoration = "underline";
 });
 
@@ -415,7 +416,7 @@ window.addEventListener("load", function () {
   setTimeout(function () {
     showView("etusivu-page");
     const link = document.getElementById("etusivu-link");
-    link.style.fontWeight = "bold";
+    link.style.fontWeight = "800";
     link.style.textDecoration = "underline";
     document.body.style.display = "";
   });
