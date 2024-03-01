@@ -30,6 +30,7 @@ function setLightTheme() {
   });
 
   document.getElementById("banner").src = "photos/banneri.png";
+  document.getElementById("popup").style.backgroundColor = "#b1dde1";
   document.getElementById("lowerNav").style.backgroundColor = "#9accd1";
   document.getElementById("topNav").style.backgroundColor = "#edffff";
   document.getElementById("newsletter").style.color = "#052b14";
@@ -67,6 +68,7 @@ function setDarkTheme() {
 
   document.querySelector("footer").style.backgroundColor = "#050706";
   document.getElementById("lowerNav").style.backgroundColor = "#050706";
+  document.getElementById("popup").style.backgroundColor = "#182721";
   document.getElementById("newsletter").style.color = "#E8E8E8";
   document.getElementById("newsletter").style.backgroundColor = "#182721";
   document.getElementById("topNav").style.backgroundColor = "#050706";
@@ -156,30 +158,6 @@ document
     changeFontSize(-1); // Kutsu changeFontSize-funktiota ja anna parametriksi -1, joka tarkoittaa pienennetään fonttikokoa
   });
 
-//KIELIVALINTA
-// Tallenna valittu kieli paikalliseen varastoon
-$(".language-option").click(function () {
-  var selectedLanguage = $(this).data("language");
-  localStorage.setItem("language", selectedLanguage);
-});
-
-// Tarkista tallennettu kieli, kun sivu ladataan tai päivitetään
-$(document).ready(function () {
-  checkLanguage(); // Tarkista kieli sivun latauksessa
-});
-
-$(window).on("load", function () {
-  checkLanguage(); // Tarkista kieli sivun päivityksessä
-});
-
-function checkLanguage() {
-  var savedLanguage = localStorage.getItem("language");
-  if (savedLanguage) {
-    $("#languageDropdown").html(
-      '<i class="fas fa-globe fa-lg"></i> ' + savedLanguage
-    );
-  }
-}
 
 // LUE LISÄÄ JA NÄYTÄ VÄHEMMÄN AJANKOHTAISTA
 $(document).ready(function () {
@@ -401,9 +379,12 @@ window.addEventListener("load", function () {
   document.body.style.display = "none";
   hideAllViews();
   this.localStorage.clear();
+  
 
   setTimeout(function () {
     showView("etusivu-page");
+    // Siirrä sivu
+    window.scrollTo({ top: 0, behavior: "smooth" });
     const link = document.getElementById("etusivu-link");
     link.style.fontWeight = "800";
     link.style.textDecoration = "underline";
@@ -420,38 +401,61 @@ document.addEventListener("DOMContentLoaded", function () {
 // YKSITTÄISEN TUOTTEEN NÄKYMÄT
 
 document.addEventListener("DOMContentLoaded", function () {
-  var buttons = document.querySelectorAll("button");
+  var buttons = document.querySelectorAll("card-link, #tuotteet-page .btn");
   buttons.forEach(function (button) {
     button.addEventListener("click", function () {
+      // Siirrä sivu
+      window.scrollTo({ top: 300, behavior: "smooth" });
       hideProductDetails();
     });
   });
 });
 function showProductDetails(productName) {
+  // Siirrä sivu
+  window.scrollTo({ top: 300, behavior: "smooth" });
   var productData = getProductData(productName);
 
   if (productData) {
-    document.getElementById("tuote-uusi").style = productData.new;
+    document.getElementById("tuote-uusi").style.display = productData.new;
     document.getElementById("tuote-nimi").innerText = productData.name;
     document.getElementById("tuote-kuva").src = productData.img;
-    document.getElementById("tuote-kuva2").src = productData.img2;
-    document.getElementById("video").src = productData.video;
+
+    if (productData.img2 !== "") {
+      document.getElementById("tuote-kuva2").style.display = "block";
+      document.getElementById("tuote-kuva2").src = productData.img2;
+    } else {
+      document.getElementById("tuote-kuva2").style.display = "none";
+    }
+
+    if (productData.video !== "") {
+      document.getElementById("video").style.display = "block";
+      document.getElementById("video").src = productData.video;
+    } else {
+      document.getElementById("video").style.display = "none";
+    }
+
     document.getElementById("tuote-kuvaus").innerHTML = productData.description;
     document.getElementById("tuote-ominaisuudet").innerHTML =
       productData.features;
     document.getElementById("tuote-lähde").innerHTML =
-      "Teksti ja kuvat: " + productData.source;
+      "Lähteet ja tuotteen ostomahdollisuus: " + productData.source;
 
     // Piilota tuotekortit
     document.getElementById("tuote-kortit").style.display = "none";
     // Näytä tuotetiedot
     document.getElementById("tuote-tiedot").style.display = "block";
+
+    // Siirrä sivu yläreunaan
+    window.scrollTo({ top: 300, behavior: "smooth" });
   } else {
     console.error("Tuotetietoja ei löytynyt.");
   }
 }
-
 function hideProductDetails() {
+  // Siirrä sivu yläreunaan
+  window.scrollTo({ top: 300, behavior: "smooth" });
+  document.getElementById("tuotteet-link").classList.add("active");
+  document.getElementById("kaikki-tuotteet-link").classList.add("active");
   // Näytä tuotekortit
   document.getElementById("tuote-kortit").style.display = "flex";
 
@@ -498,7 +502,85 @@ function getProductData(productName) {
       source:
         "<a href='https://tractive.com/en/pd/gps-tracker-cat'>https://tractive.com/en/pd/gps-tracker-cat</a>",
     },
+
+    "Catit Pixi Smart -vesiautomaatti": {
+      new: "none",
+      img: "photos/Ajankohtaista ja Tuotteet/4.png",
+      name: "Catit Pixi Smart -vesiautomaatti",
+      source:
+        "https://www.petenkoiratarvike.com/kissat/koti-ja-piha/kissan-juoma-automaatti/catit-pixi-smart–vesiautomaatti-kissalle/153831?82684",
+      description:
+        "Catit Pixi Smart -vesiautomaatti on innovatiivinen tuote, joka on suunniteltu helpottamaan kissan juomista ja tukemaan sen hyvinvointia. Tämä älykäs vesiautomaatti tarjoaa useita ominaisuuksia, jotka voivat tehdä lemmikkisi juomisesta mukavampaa ja terveellisempää. Tässä muutamia piirteitä:",
+      features:
+        "<ul>" +
+        "<li><strong>Älykäs toiminta:</strong> Catit Pixi Smart -vesiautomaatti reagoi automaattisesti lemmikin läsnäoloon. Se aktivoituu, kun kissa lähestyy ja samenee pois sen poistuessa.</li>" +
+        "<li><strong>Virtaava vesi:</strong> Vesiautomaatti tarjoaa jatkuvasti virtaavaa vettä, mikä voi houkutella kissoja juomaan enemmän. Virtaava vesi voi myös pysyä raikkaampana pidempään.</li>" +
+        "<li><strong>Suodatusjärjestelmä:</strong> Laite on varustettu suodatusjärjestelmällä, joka poistaa epäpuhtaudet ja epämiellyttävät hajut vedestä. Tämä varmistaa, että kissasi juo puhdasta ja raikasta vettä.</li>" +
+        "<li><strong>Älypuhelinsovellus:</strong> Catit Pixi Smart -vesiautomaatin voi yhdistää älypuhelimeen sovelluksen avulla. Sovelluksen avulla voit seurata kissan juomistottumuksia ja saada ilmoituksia esimerkiksi veden täyttötarpeesta.</li>" +
+        "<li><strong>Helppo Puhdistus:</strong> Laite on suunniteltu helppoon purkamiseen ja puhdistukseen, mikä tekee ylläpidosta vaivatonta ja pitää veden laadun optimaalisena.</li>" +
+        "<li><strong>Virtapihimpi Toiminta:</strong> Catit Pixi Smart on suunniteltu virtapihimmäksi kuin monet perinteiset vesiautomaatit, mikä voi olla hyödyllistä energiankulutuksen optimoinnissa.</li>" +
+        "</ul>" +
+        "<p>Tämä vesiautomaatti tarjoaa siten monipuolisia ominaisuuksia, jotka tekevät siitä käytännöllisen ja hyödyllisen ratkaisun kissan juomisen hallintaan ja tukemiseen. Suositeltavaa on tutustua tarkempiin teknisiin yksityiskohtiin ja arvioihin valmistajan verkkosivuilla tai asiakkaiden arvosteluissa saadaksesi lisätietoja.</p>",
+
+      img2: "",
+      video: "",
+    },
+
+    "Petnet SmartFeeder": {
+      new: "none",
+      img: "photos/Ajankohtaista ja Tuotteet/1.png",
+      name: "Petnet SmartFeeder",
+      source:
+        "https://smart-home-products.myshopify.com/products/petnet-smartfeeder-automatic-pet-feeding-from-your-smartphone",
+      description:
+        "Petnet SmartFeeder on älykäs automaattiruokkija, joka tarjoaa omistajille mahdollisuuden hallita lemmikin ruokailua älypuhelimen avulla. Tässä muutamia piirteitä, jotka tekevät siitä merkittävän esimerkin:",
+      features:
+        "<p><strong>Älykäs annostelu:</strong><br>Petnet SmartFeeder pystyy annostelemaan tarkkoja ruoka-annoksia lemmikillesi. Voit ohjelmoida ja säätää ruoka-annosten kokoja älypuhelimesi sovelluksen avulla.</p>" +
+        "<p><strong>Personoitu ruokavalio:</strong><br>Sovelluksen avulla voit luoda personoidun ruokavalion lemmikillesi ottaen huomioon sen koon, iän ja terveydentilan. Tämä auttaa varmistamaan, että lemmikkisi saa oikeanlaista ravintoa.</p>" +
+        "<p><strong>Etäohjaus:</strong><br>Omistajat voivat hallita ruokintalaitteistoa etänä mistä tahansa älypuhelimen sovelluksen avulla. Voit antaa ruokaa lemmikillesi vaikka olisit poissa kotoa.</p>" +
+        "<p><strong>Terveyden seuranta:</strong><br>Petnet SmartFeeder voi myös auttaa omistajia seuraamaan lemmikin ruokailutottumuksia ja kalorien saantia. Tämä on erityisen hyödyllistä, jos lemmikilläsi on erityistarpeita, kuten painonhallintaa tai ruoka-aineallergioita.</p>" +
+        "<p><strong>Ilmoitukset ja muistutukset:</strong><br>Sovellus lähettää ilmoituksia, kun on aika täyttää ruokasäiliö tai jos ruokinta on suoritettu onnistuneesti. Tämä auttaa varmistamaan, että lemmikillesi tarjotaan säännöllisesti ruokaa.</p>" +
+        "<p>Petnet SmartFeeder on esimerkki siitä, miten älykkäät ruokintalaitteet voivat helpottaa lemmikinruokintaan liittyviä tehtäviä ja samalla tarjota mahdollisuuden personoituihin ruokavalioihin. Tällainen teknologia ei ainoastaan säästä omistajan aikaa, vaan myös edistää lemmikin terveyttä ja hyvinvointia.</p>",
+      img2: "",
+      video: "",
+    },
+    "PetCube Bites 2": {
+      new: "none",
+      img: "photos/Ajankohtaista ja Tuotteet/5.png",
+      name: "PetCube Bites 2",
+      source: "https://petcube.com/bites-2-lite/",
+      description:
+        "Yksi kotikäyttöinen teknologiatuote lemmikin hyvinvoinnin seurantaan ja valvontaan on Petcube Bites 2. Tämä on älykäs lemmikkikamera, joka tarjoaa useita toimintoja lemmikin seurantaan ja vuorovaikutukseen.",
+      features:
+        "<p><strong>HD-kamera ja live-stream:</strong><br>Petcube Bites 2 on varustettu HD-kameralla, joka mahdollistaa reaaliaikaisen videostreamauksen lemmikin toimista. Voit tarkkailla lemmikkiäsi päivän aikana mistä tahansa älypuhelinsovelluksen avulla.</p>" +
+        "<p><strong>Heittotoiminto leikkejä ja palkitsemista Varten:</strong><br>Yksi erottuva piirre on ruoan heittotoiminto. Voit etänä heittää herkkuja tai lempiruokaa lemmikillesi, mikä tarjoaa vuorovaikutteista leikkiä ja palkitsemista.</p>" +
+        "<p><strong>Älykäs hälytysjärjestelmä:</strong><br>Laitteessa on älykäs hälytysjärjestelmä, joka ilmoittaa liikkeestä tai äänestä. Tämä voi auttaa seuraamaan, mitä lemmikkisi tekee silloinkin, kun et ole kotona.</p>" +
+        "<p><strong>Kaksisuuntainen ääni:</strong><br>Puhelimella voit puhua lemmikillesi kaksisuuntaisen äänitoiminnon avulla. Tämä voi olla lohdullista ja auttaa rauhoittamaan lemmikkiäsi, jos se on levoton.</p>" +
+        "<p><strong>Videotallennus ja valokuvanotto:</strong><br>Petcube Bites 2 mahdollistaa videotallennuksen ja valokuvien ottamisen, jotta voit tallentaa ja jakaa hauskoja tai suloisia hetkiä lemmikkisi kanssa.</p>" +
+        "<p><strong>Yhteensopivuus älylaitteiden Kanssa:</strong><br>Laite on yhteensopiva useiden älylaitteiden, kuten Amazon Alexan ja Google Assistantin, kanssa, mikä tekee sen integroimisesta osaksi älykotijärjestelmää helpompaa.</p>",
+      img2: "",
+      video: "https://www.youtube.com/embed/PJ-seNwO4xY",
+    },
+    "PetSafe® FroliCat® Bolt Laser -kissanlelu": {
+      new: "none",
+      img: "photos/Ajankohtaista ja Tuotteet/6.png",
+      name: "PetSafe® FroliCat® Bolt Laser Cat Toy",
+      source:
+        "https://www.zooplus.com/shop/cats/cat_toys/laser_cat_toys/185593",
+      description:
+        "PetSafe® FroliCat® Bolt Laser Cat Toy on älykäs ja virikkeellinen lelu, joka on suunniteltu tuomaan iloa ja aktiivisuutta kissasi elämään. Tämä älykäs lelu käyttää laserpistettä houkutellakseen kissasi mukaan interaktiiviseen ja liikunnalliseen leikkiin.",
+      features:
+        "<p><strong>Automaattinen liike- ja valotoiminto:</strong><br>FroliCat Bolt luo jatkuvasti liikkuvan laserpisteen ympäri huonetta, joka stimuloi kissan metsästysvaistoa. Automaattinen liiketunnistin ohjaa laseria sattumanvaraisesti, mikä pitää leikin jännittävänä ja yllätyksellisenä.</p>" +
+        "<p><strong>Käsinohjattava liike:</strong><br>Laitteessa on myös manuaalinen ohjausmahdollisuus, joka antaa omistajalle mahdollisuuden ohjata laserin liikettä. Tämä mahdollistaa vuorovaikutteisen leikin ja luo vahvemman siteen kissan ja omistajan välille.</p>" +
+        "<p><strong>Turvallinen ja virikkeellinen leikki:</strong><br>Laserpisteen jahtaaminen tarjoaa turvallisen ja virikkeellisen leikin, joka auttaa kissaa pysymään aktiivisena ja viihdyttää sitä pitkiäkin aikoja.</p>" +
+        "<p><strong>Automaattinen sammutus:</strong><br>Boltissa on automaattinen sammutustoiminto, joka estää lemmikkiäsi ylirasittumasta pitkän leikin aikana. Tämä ominaisuus myös säästää paristoja.</p>" +
+        "<p><strong>Helppo käyttö:</strong><br>FroliCat Bolt on helppo käyttää yksinkertaisella painikkeella. Voit käynnistää ja pysäyttää lelun helposti tarpeesi mukaan.</p>" +
+        "<p><strong>Monipuolinen virike:</strong><br>Tämä älykäs lelu tarjoaa monipuolisen virikkeen kissallesi, auttaen sitä käyttämään energiaansa ja tyydyttämään luonnollisia vaistojaan.</p>",
+      img2: "",
+      video: "",
+    },
   };
+
   return productData[productName];
 }
 
@@ -526,3 +608,54 @@ async function initMap() {
 function hideNavbar() {
   $("#navbarSupportedContentLowerNav").collapse("hide");
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  var navigationLinks = document.querySelectorAll(".navigation");
+
+  navigationLinks.forEach(function(link) {
+    link.addEventListener("click", function(event) {
+      event.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  var navigationLinks = document.querySelectorAll(".card-link");
+
+  navigationLinks.forEach(function(link) {
+    link.addEventListener("click", function(event) {
+      event.preventDefault();
+      window.scrollTo({
+        top: 300,
+        behavior: "smooth"
+      });
+    });
+  });
+});
+
+
+var popupBtn = document.getElementById("newsbtn");
+var lomakeBtn = document.getElementById("lomakebtn");
+var popup = document.getElementById("popup");
+var overlay = document.getElementById("overlay");
+var closeBtn = document.getElementById("close");
+
+popupBtn.addEventListener("click", function() {
+  popup.style.display = "block";
+  overlay.style.display = "block";
+});
+
+closeBtn.addEventListener("click", function() {
+  popup.style.display = "none";
+  overlay.style.display = "none";
+});
+
+overlay.addEventListener("click", function() {
+  popup.style.display = "none";
+  overlay.style.display = "none";
+});
+

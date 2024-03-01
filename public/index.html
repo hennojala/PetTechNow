@@ -311,6 +311,14 @@
                   <div class="col-auto" style="padding-left: 0; padding-top: 5px;">
                     <button id="newsbtn" type="submit" style="background-color: #438975;"
                       class="btn btn-secondary mb-3">Tilaa</button>
+
+                    <div id="overlay" class="overlay"></div>
+                    <div id="popup" class="popup">
+                      <span id="close"
+                        style="cursor: pointer; position: absolute; top: 10px; right: 15px;">&times;</span>
+                      <p>Kiitos mielenkiinnosta uutiskirjettämme kohtaa.</p>
+                      <p>Valitettavasti tämä toiminnallisuus ei ole vielä käytössä sivustollamme.</p>
+                    </div>
                   </div>
                 </div>
 
@@ -353,7 +361,8 @@
             <p>Teksti ja kuva: <a href="https://www.petpuls.net/buy?lang=en"
                 target="_blank">https://www.petpuls.net/buy?lang=en</a></p>
 
-            <a href="#" class="btn btn-secondary" data-product="PetPuls -älypanta" data-view="tuotteet-page"
+            <a href="#" style="width: 120px;" class="btn btn-secondary nav-link" data-product="PetPuls -älypanta"
+              data-view="tuotteet-page"
               onclick="showView('tuotteet-page'); showProductDetails('PetPuls -älypanta');">Tuotesivulle</a>
           </div>
         </div>
@@ -478,7 +487,8 @@
               liittyvien teknologisten ratkaisujen kehittämiseen.</p>
 
             <p>Teksti ja kuva: https://tractive.com/en/pd/gps-tracker-cat</p>
-            <a href="#" class="btn btn-secondary" data-view="tuotteet-page"
+            <a id="tuotesivulle-btn" href="#" style="width: 120px;" class="btn btn-secondary nav-link"
+              data-view="tuotteet-page"
               onclick="showView('tuotteet-page'); showProductDetails('Tractive GPS Tracker for Cats');">Tuotesivulle</a>
           </div>
         </div>
@@ -519,7 +529,8 @@
           </div>
 
           <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
-            <a href="#" class="card card-link" data-category="ruokintalaitteet">
+            <a href="#" class="card card-link" onclick="showProductDetails('Petnet SmartFeeder')"
+              data-category="ruokintalaitteet">
               <div class="card-body">
                 <br>
                 <h5 class="card-title">Petnet SmartFeeder</h5>
@@ -529,7 +540,8 @@
           </div>
 
           <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
-            <a href="#" class="card card-link" data-category="ruokintalaitteet">
+            <a href="#" class="card card-link" onclick="showProductDetails('Catit Pixi Smart -vesiautomaatti')"
+              data-category="ruokintalaitteet">
               <div class="card-body">
                 <br>
                 <h5 class="card-title">Catit Pixi Smart -vesiautomaatti</h5>
@@ -539,7 +551,8 @@
           </div>
 
           <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
-            <a href="#" class="card card-link" data-category="lelut">
+            <a href="#" class="card card-link" onclick="showProductDetails('PetCube Bites 2')"
+              data-category="valvontalaitteet">
               <div class="card-body">
                 <br>
                 <h5 class="card-title">PetCube Bites 2</h5>
@@ -549,7 +562,8 @@
           </div>
 
           <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3 d-flex">
-            <a href="#" class="card card-link" data-category="lelut">
+            <a href="#" class="card card-link" onclick="showProductDetails('PetSafe® FroliCat® Bolt Laser -kissanlelu')"
+              data-category="lelut">
               <div class="card-body">
                 <br>
                 <h5 class="card-title">PetSafe® FroliCat® Bolt Laser -kissanlelu</h5>
@@ -581,13 +595,13 @@
           <img id="tuote-kuva">
           <p id="tuote-kuvaus" class="card-text"></p>
           <p id="tuote-ominaisuudet"></p>
-          <img id="tuote-kuva2">
-          <iframe id="video" frameborder="0" allowfullscreen></iframe>
+          <img id="tuote-kuva2" style="display: none;"><br><br>
+          <iframe id="video" frameborder="0" allowfullscreen style="display: none;"></iframe>
           <p id="tuote-lähde"></p>
           <br>
-          <button class="btn btn-secondary" onclick="hideProductDetails()">Takaisin</button>
-
+          <button id="takaisin-btn" onclick="hideProductDetails()">Tuotteisiin</button>
         </div>
+
       </div>
     </div>
   </div>
@@ -852,6 +866,7 @@
                 <textarea class="form-control" id="viesti" rows="4" required></textarea>
               </div>
               <button type="submit" class="btn btn-primary">Lähetä</button>
+            
             </form>
 
           </div>
@@ -897,6 +912,7 @@
         </div>
       </div>
       <button id="newsbtn" type="submit" class="btn btn-secondary mb-3">Peruuta</button>
+    
     </div>
   </div>
 
