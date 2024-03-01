@@ -30,7 +30,7 @@ function setLightTheme() {
   });
 
   document.getElementById("banner").src = "photos/banneri.png";
-  document.getElementById("popup").style.backgroundColor = "#b1dde1";
+  document.getElementById("popup").style.backgroundColor = "#bdfafa;";
   document.getElementById("lowerNav").style.backgroundColor = "#9accd1";
   document.getElementById("topNav").style.backgroundColor = "#edffff";
   document.getElementById("newsletter").style.color = "#052b14";
@@ -68,7 +68,7 @@ function setDarkTheme() {
 
   document.querySelector("footer").style.backgroundColor = "#050706";
   document.getElementById("lowerNav").style.backgroundColor = "#050706";
-  document.getElementById("popup").style.backgroundColor = "#182721";
+  document.getElementById("popup").style.backgroundColor = "#050706";
   document.getElementById("newsletter").style.color = "#E8E8E8";
   document.getElementById("newsletter").style.backgroundColor = "#182721";
   document.getElementById("topNav").style.backgroundColor = "#050706";
@@ -202,16 +202,10 @@ document.addEventListener("DOMContentLoaded", function () {
       navLink.style.fontWeight = "900";
       navLink.style.textDecoration = "underline";
       navLink.style.backgroundColor = "#B8C7C8";
-
-      // Päivitä aktiivinen sivun nimi pienellä viiveellä
-      setTimeout(updateActivePageLink, 100);
     });
   });
   // Päivitä aktiivinen sivu sivun latauksen yhteydessä
   updateActivePage();
-
-  // Päivitä aktiivinen sivun linkki
-  updateActivePageLink();
 });
 
 // Funktio näkymän näyttämiseksi ja scrollaamiseksi yläosaan
@@ -236,30 +230,6 @@ function updateActivePage() {
   if (activeViewId) {
     hideAllViews();
     showView(activeViewId);
-  }
-}
-function updateActivePageLink() {
-  // Etsitään aktiivinen navigaatiolinkki
-  var activeLink = document.querySelector(".nav-link.active");
-
-  // Etsitään aktiivinen sivun nimen linkki hampurilaisvalikon vierestä
-  var activePageLink = document.querySelector(".navbar-text #active-Name");
-
-  // Tarkistetaan, että aktiivinen linkki ja sivun nimen linkki ovat olemassa
-  if (activeLink && activePageLink) {
-    // Haetaan aktiivisen linkin teksti
-    var activeLinkText = activeLink.innerText;
-    // Jos aktiivinen linkki on dropdown-valikon alivalikossa
-    if (activeLink.closest(".dropdown-menu")) {
-      // Haetaan päälinkin teksti
-      var productsLinkText = document.getElementById("tuotteet-link").innerText;
-      // Yhdistetään päälinkin teksti ja aktiivisen linkin teksti
-
-      activeLinkText = productsLinkText + " | " + activeLinkText;
-    }
-
-    // Päivitetään aktiivisen sivun nimen linkin teksti ja href-attribuutti
-    activePageLink.innerText = activeLinkText;
   }
 }
 
@@ -386,6 +356,8 @@ window.addEventListener("load", function () {
     const link = document.getElementById("etusivu-link");
     link.style.fontWeight = "800";
     link.style.textDecoration = "underline";
+    document.getElementById("light-theme-toggle").disabled = false;
+
     document.body.style.display = "";
   });
 });
@@ -639,22 +611,20 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 var popupBtn = document.getElementById("newsbtn");
-var lomakeBtn = document.getElementById("lomakebtn");
 var popup = document.getElementById("popup");
-var overlay = document.getElementById("overlay");
 var closeBtn = document.getElementById("close");
 
-popupBtn.addEventListener("click", function () {
+popupBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  console.log("popupBtn");
   popup.style.display = "block";
   overlay.style.display = "block";
 });
 
 closeBtn.addEventListener("click", function () {
+  console.log("closeBtn");
   popup.style.display = "none";
   overlay.style.display = "none";
 });
 
-overlay.addEventListener("click", function () {
-  popup.style.display = "none";
-  overlay.style.display = "none";
-});
