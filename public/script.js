@@ -158,7 +158,6 @@ document
     changeFontSize(-1); // Kutsu changeFontSize-funktiota ja anna parametriksi -1, joka tarkoittaa pienennetään fonttikokoa
   });
 
-
 // LUE LISÄÄ JA NÄYTÄ VÄHEMMÄN AJANKOHTAISTA
 $(document).ready(function () {
   $("[id^='lueLisaaNappi']").click(function (e) {
@@ -379,7 +378,6 @@ window.addEventListener("load", function () {
   document.body.style.display = "none";
   hideAllViews();
   this.localStorage.clear();
-  
 
   setTimeout(function () {
     showView("etusivu-page");
@@ -584,6 +582,7 @@ function getProductData(productName) {
   return productData[productName];
 }
 
+// Initialize and add the map
 let map;
 
 async function initMap() {
@@ -595,7 +594,7 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     zoom: 15,
     center: position,
-    mapId: "b003ec40387a4e50",
+    mapId: "PetTechNow",
   });
 
   const marker = new AdvancedMarkerElement({
@@ -605,38 +604,39 @@ async function initMap() {
   });
 }
 
+initMap();
+
 function hideNavbar() {
   $("#navbarSupportedContentLowerNav").collapse("hide");
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   var navigationLinks = document.querySelectorAll(".navigation");
 
-  navigationLinks.forEach(function(link) {
-    link.addEventListener("click", function(event) {
+  navigationLinks.forEach(function (link) {
+    link.addEventListener("click", function (event) {
       event.preventDefault();
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     });
   });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   var navigationLinks = document.querySelectorAll(".card-link");
 
-  navigationLinks.forEach(function(link) {
-    link.addEventListener("click", function(event) {
+  navigationLinks.forEach(function (link) {
+    link.addEventListener("click", function (event) {
       event.preventDefault();
       window.scrollTo({
         top: 300,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     });
   });
 });
-
 
 var popupBtn = document.getElementById("newsbtn");
 var lomakeBtn = document.getElementById("lomakebtn");
@@ -644,18 +644,17 @@ var popup = document.getElementById("popup");
 var overlay = document.getElementById("overlay");
 var closeBtn = document.getElementById("close");
 
-popupBtn.addEventListener("click", function() {
+popupBtn.addEventListener("click", function () {
   popup.style.display = "block";
   overlay.style.display = "block";
 });
 
-closeBtn.addEventListener("click", function() {
+closeBtn.addEventListener("click", function () {
   popup.style.display = "none";
   overlay.style.display = "none";
 });
 
-overlay.addEventListener("click", function() {
+overlay.addEventListener("click", function () {
   popup.style.display = "none";
   overlay.style.display = "none";
 });
-
