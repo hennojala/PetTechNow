@@ -36,6 +36,10 @@ footer p {
   margin-bottom: 5px;
 }
 
+.img-fluid {
+  width: 100% !important;
+}
+
 #searchBtn {
   margin-left: 0;
   margin-right: 3vw;
@@ -137,6 +141,36 @@ a:active {
 }
 
 .popup {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #bdfafa;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+.Lpopup {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #bdfafa;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+.Dpopup {
   display: none;
   position: fixed;
   left: 50%;
@@ -571,6 +605,8 @@ h6 {
   overflow: hidden;
   object-fit: cover;
   object-position: top; /* Kuvan yläreuna leikataan pois ja alareuna pysyy näkyvissä */
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #yhteystiedot-page .card-container {

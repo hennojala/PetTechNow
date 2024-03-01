@@ -616,15 +616,35 @@ var closeBtn = document.getElementById("close");
 
 popupBtn.addEventListener("click", function (event) {
   event.preventDefault();
-
-  console.log("popupBtn");
   popup.style.display = "block";
-  overlay.style.display = "block";
 });
 
 closeBtn.addEventListener("click", function () {
-  console.log("closeBtn");
   popup.style.display = "none";
-  overlay.style.display = "none";
 });
 
+var LpopupBtn = document.getElementById("lomakebtn");
+var Lpopup = document.getElementById("Lpopup");
+var LcloseBtn = document.getElementById("Lclose");
+
+LpopupBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  Lpopup.style.display = "block";
+});
+
+LcloseBtn.addEventListener("click", function () {
+  Lpopup.style.display = "none";
+});
+
+var newsbtnDelete = document.getElementById("btnDelete");
+var Dpopup = document.getElementById("Dpopup");
+var DcloseBtn = document.getElementById("Dclose");
+
+newsbtnDelete.addEventListener("click", function (event) {
+  event.preventDefault();
+  Dpopup.style.display = "block";
+});
+
+DcloseBtn.addEventListener("click", function () {
+  Dpopup.style.display = "none";
+});
