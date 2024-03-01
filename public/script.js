@@ -3,7 +3,7 @@ function setLightTheme() {
   document.body.style.backgroundColor = "#edffff";
   document.body.style.color = "black";
   document.querySelector(".navbar").style.backgroundColor = "#edffff";
-  document.querySelectorAll(".nav-link").forEach(function (link) {
+  document.querySelectorAll("i").forEach(function (link) {
     link.style.color = "black";
   });
 
@@ -20,7 +20,7 @@ function setLightTheme() {
   document
     .querySelectorAll(".card-container:not(#yhteystiedot-page .card-container)")
     .forEach(function (container) {
-      container.style.backgroundColor = "#c6d6d4"; 
+      container.style.backgroundColor = "#c6d6d4";
     });
 
   var cards = document.querySelectorAll(".card");
@@ -29,11 +29,6 @@ function setLightTheme() {
     card.style.backgroundColor = "white";
   });
 
-  var buttons = document.querySelectorAll("button");
-  buttons.forEach(function (button) {
-    button.style.backgroundColor = "transparent";
-    button.style.color = "#1E2F2D";
-  });
   document.getElementById("banner").src = "photos/banneri.png";
   document.getElementById("lowerNav").style.backgroundColor = "#9accd1";
   document.getElementById("topNav").style.backgroundColor = "#edffff";
@@ -45,8 +40,8 @@ function setLightTheme() {
 // Funktio tumman teeman asettamiseksi
 function setDarkTheme() {
   document.body.style.backgroundColor = "#1E2F2D";
-  document.querySelectorAll(".nav-link").forEach(function (link) {
-    link.style.color = "#E8E8E8";
+  document.querySelectorAll("i").forEach(function (link) {
+    link.style.color = "white";
   });
   document
     .querySelectorAll(
@@ -57,12 +52,6 @@ function setDarkTheme() {
         element.style.color = "#E8E8E8";
       }
     });
-
-  var buttons = document.querySelectorAll("button");
-  buttons.forEach(function (button) {
-    button.style.backgroundColor = "#94ABA8";
-    button.style.color = "darkgray";
-  });
 
   document
     .querySelectorAll(".card-container:not(#yhteystiedot-page .card-container)")
@@ -227,13 +216,13 @@ document.addEventListener("DOMContentLoaded", function () {
           link.classList.remove("active");
           link.style.fontWeight = "700";
           link.style.textDecoration = "none";
-          link.style.backgroundColor = "transparent";
+          link.style.backgroundColor = "#acd4d7";
         }
       });
 
       // Lisää boldaus ja alleviivaus valittuun linkkiin
       navLink.classList.add("active");
-      navLink.style.fontWeight = "800";
+      navLink.style.fontWeight = "900";
       navLink.style.textDecoration = "underline";
       navLink.style.backgroundColor = "#B8C7C8";
 
@@ -393,7 +382,7 @@ const mainProductsLink = document.getElementById("tuotteet-link");
 
 mainProductsLink.addEventListener("click", function () {
   const navLinks = document.querySelectorAll(".nav-link");
-  // Poista boldaus ja alleviivaus kaikista muista linkeistä
+
   navLinks.forEach(function (link) {
     link.classList.remove("active");
     link.style.fontWeight = "700";
@@ -451,7 +440,7 @@ function showProductDetails(productName) {
     document.getElementById("tuote-ominaisuudet").innerHTML =
       productData.features;
     document.getElementById("tuote-lähde").innerHTML =
-      "Lähde: " + productData.source;
+      "Teksti ja kuvat: " + productData.source;
 
     // Piilota tuotekortit
     document.getElementById("tuote-kortit").style.display = "none";
@@ -484,7 +473,7 @@ function getProductData(productName) {
       features:
         'Laiteominaisuudet: <ul><li>iOS- ja Android-sovellusyhteensopivuus: iOS-versio 11 tai uudempi, Android-versio 4.1 tai uudempi.</li><li>Saatavana kahdessa koossa sopivaksi pienille ja suurille koiraroduille.</li><li>Kaulapannan mitat: <li>Laite: Pituus: 2” x Korkeus: 1.38” x Syvyys: 0.70”</li><li>Hihna: Korkeus: 0.63” x Syvyys: 0.13”</li><li>Laite + Hihna: <li>Pieni: Pituus: 16.3” x Korkeus: 1.38” x Syvyys: 0.70”</li><li>Iso: Pituus: 30.5" x Korkeus: 1.38” x Syvyys: 0.70”</li></li></li><li>Petpuls-laitteessa on 3-värinen LED-taustavalaistu näyttö, virtapainike, mikrofoni, USB-latausportti ja reset-painike.</li><li>Paino: Juuri alle 25 grammaa</li><li>Vedenkestävyys (IP54): Laite ei saa upota veteen tai olla koiran uimisen aikana.</li><li>Akunkesto: 8-10 tuntia yhdellä täydellä latauksella; suositellaan yöllistä lataamista.</li><li>Wi-Fi-paritus etäisyys: Noin 15 jalkaa (5 metriä). Älypanta kytkeytyy omistajan älypuhelimeen ulkona ollessaan ja synkronoi paritetun sovelluksen kanssa, kun olet takaisin Wi-Fi-verkossa.</li><li>KC, ROHS ja MSDS -sertifikaatit; FCC-sertifiointi.</li><li>Tunnetilojen tulkinta sovelluksessa.</li></ul> Kuva tunnetilojen tulkinnasta sovelluksessa:',
       img2: "photos/Ajankohtaista ja Tuotteet/2.png",
-      video: "https://www.youtube.com/watch?v=F0UWI2GBMt0",
+      video: "https://www.youtube.com/embed/F0UWI2GBMt0",
       source:
         "<a href='https://www.petpuls.net/buy?lang=en'>https://www.petpuls.net/buy?lang=en</a>",
     },
@@ -511,4 +500,29 @@ function getProductData(productName) {
     },
   };
   return productData[productName];
+}
+
+let map;
+
+async function initMap() {
+  const position = { lat: 62.240622, lng: 25.745344 };
+
+  const { Map } = await google.maps.importLibrary("maps");
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+  map = new Map(document.getElementById("map"), {
+    zoom: 15,
+    center: position,
+    mapId: "b003ec40387a4e50",
+  });
+
+  const marker = new AdvancedMarkerElement({
+    map: map,
+    position: position,
+    title: "PetTechNow",
+  });
+}
+
+function hideNavbar() {
+  $("#navbarSupportedContentLowerNav").collapse("hide");
 }

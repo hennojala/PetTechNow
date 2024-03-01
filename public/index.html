@@ -14,10 +14,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
 
-  
+
   <title>PetTechNow -Etusivu</title>
 
   <script src="script.js" defer></script>
@@ -34,48 +35,10 @@
     crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="style.css" />
-  <script>
-    let map;
-
-    async function initMap() {
-      const { Map } = await google.maps.importLibrary("maps");
-
-      map = new Map(document.getElementById("map"), {
-        center: { lat: 62.240622, lng: 25.745344 },
-        zoom: 14,
-      });
-
-      new google.maps.Marker({
-        position: { lat: 62.240622, lng: 25.745344 },
-        map: map,
-        title: 'Kauppakatu 1, Jyväskylä',
-        label: {
-          text: 'PetTechNow',
-          color: 'black',
-          fontSize: '14px',
-          fontWeight: 'bold',
-          background: 'white',
-          padding: '5px 10px',
-          borderRadius: '5px'
-        }
-      });
-    }
-
-    initMap();
-  </script>
-  <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdCysXG_MEvxrj1L5V0T_i0g49Tigl2MY&callback=initMap"></script>
-  <script>
-    (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
-      key: "AIzaSyAdCysXG_MEvxrj1L5V0T_i0g49Tigl2MY",
-      v: "weekly",
-    });
-
-  </script>
-
 </head>
 
 <body>
+
 
 
   <div>
@@ -83,60 +46,59 @@
     <nav id="topNav" class="navbar navbar-expand-lg ">
       <div class="container-fluid">
         <!--Search input and button-->
-          <ul class="navbar-nav ml-auto flex-row">
-            <li class="nav-item">
-                <input id="searchBox" class="form-control my-0 my-sm-1" type="text" placeholder="Hae..." />
-              </li>
-              <li>
-                <button id="searchBtn" class="btn my-0 my-sm-1 custom-search-btn" type="submit">
-                  <i class="fas fa-search custom-search-btn"></i>
-                </button>
-              </li>
+        <ul class="navbar-nav ml-auto flex-row">
+          <li class="nav-item">
+            <input id="searchBox" class="form-control my-0 my-sm-1" type="text" placeholder="Hae... (ei käytössä)" />
+          </li>
+          <li>
+            <button id="searchBtn" class="btn my-0 my-sm-1 custom-search-btn" type="submit">
+              <i class="fas fa-search custom-search-btn"></i>
+            </button>
+          </li>
 
-            <!--Theme icon, light and dark-->
-            <li class="nav-item">
-              <button id="light-theme-toggle" class="btn my-0 my-sm-1">
-                <i id="light-theme-icon" class="fas fa-sun"></i>
-              </button>
-            </li>
-            <li class="nav-item">
-              <button id="dark-theme-toggle" class="btn my-0 my-sm-1">
-                <i id="dark-theme-icon" class="fas fa-moon"></i>
-              </button>
-            </li>
+          <!--Theme icon, light and dark-->
+          <li class="nav-item">
+            <button id="light-theme-toggle" class="btn my-0 my-sm-1">
+              <i id="light-theme-icon" class="fas fa-sun"></i>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button id="dark-theme-toggle" class="btn my-0 my-sm-1">
+              <i id="dark-theme-icon" class="fas fa-moon"></i>
+            </button>
+          </li>
 
-            <li id="fontSizeChange" class="nav-item">
-              <!-- Font size plus -icon -->
-              <button id="plus-font-button" class="btn my-0 my-sm-1">
-                <i class="fas fa-font"></i>
-                <i class="fas fa-plus"></i>
-              </button>
-            </li>
-            
-            <li id="fontSizeChange" class="nav-item">
-              <!-- Font size minus -icon -->
-              <button id="minus-font-button" class=" btn my-0 my-sm-1">
-                <i class="fas fa-font"></i>
-                <i class="fas fa-minus"></i>
-              </button>
-            </li>
+          <li id="fontSizeChange" class="nav-item">
+            <!-- Font size plus -icon -->
+            <button id="plus-font-button" class="btn my-0 my-sm-1">
+              <i class="fas fa-font"></i>
+              <i class="fas fa-plus"></i>
+            </button>
+          </li>
 
-            <!--Language icon-->
-            <li class="nav-item">
-              <div class="dropdown">
-                <button class="btn my-0 my-sm-1 dropdown-toggle" type="button"
-                  id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-globe fa-lg"></i>
-                </button>
-                <div id="languageDrop" class="dropdown-menu" style="max-width: 200px"
-                  aria-labelledby="languageDropdown">
-                  <a class="dropdown-item language-option" href="#" data-language="FI">FI</a>
-                  <a class="dropdown-item language-option" href="#" data-language="SV">SV</a>
-                  <a class="dropdown-item language-option" href="#" data-language="EN">EN</a>
-                </div>
+          <li id="fontSizeChange" class="nav-item">
+            <!-- Font size minus -icon -->
+            <button id="minus-font-button" class=" btn my-0 my-sm-1">
+              <i class="fas fa-font"></i>
+              <i class="fas fa-minus"></i>
+            </button>
+          </li>
+
+          <!--Language icon-->
+          <li class="nav-item">
+            <div class="dropdown">
+              <button class="btn my-0 my-sm-1 dropdown-toggle" type="button" id="languageDropdown"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-globe fa-lg"></i>
+              </button>
+              <div id="languageDrop" class="dropdown-menu" style="max-width: 200px" aria-labelledby="languageDropdown">
+                <a class="dropdown-item language-option" href="#" data-language="FI">FI</a>
+                <a class="dropdown-item language-option" href="#" data-language="SV">SV</a>
+                <a class="dropdown-item language-option" href="#" data-language="EN">EN</a>
               </div>
-            </li>
-          </ul>
+            </div>
+          </li>
+        </ul>
       </div>
     </nav>
 
@@ -150,74 +112,71 @@
     </div>
 
 
-
-
     <!-- ALEMPI NAVIPALKKI -->
     <nav id="lowerNav" class="navbar navbar-expand-lg navbar-light custom-navbar">
       <div class="container-fluid">
         <span class="navbar-text d-lg-none">
-          <a id="active-Name" href="#" class="active-page-link" onclick="showView('etusivu')">Etusivu</a>
+          <a id="active-Name" href="#" class="active-page-link" onclick="showView('etusivu')">ETUSIVU</a>
         </span>
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+        <button id="hampurilaisvalikko-nappi" class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
           data-target="#navbarSupportedContentLowerNav" aria-controls="navbarSupportedContentLowerNav"
           aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-
         <div class="collapse navbar-collapse" id="navbarSupportedContentLowerNav">
           <ul class="navbar-nav mx-auto" style="text-align: center">
             <li class="nav-item">
-              <a id="etusivu-link" class="nav-link" href="#" onclick="showView('etusivu-page')"
+              <a id="etusivu-link" class="nav-link" href="#" onclick="showView('etusivu-page'); hideNavbar();"
                 data-view="etusivu-page">ETUSIVU</a>
-         
             </li>
             <li class="nav-item">
-              <a id="ajankohtaista-link" class="nav-link" href="#" onclick="showView('ajankohtaista-page')"
-                data-view="ajankohtaista-page">AJANKOHTAISTA</a>
-             
+              <a id="ajankohtaista-link" class="nav-link" href="#"
+                onclick="showView('ajankohtaista-page'); hideNavbar();" data-view="ajankohtaista-page">AJANKOHTAISTA</a>
             </li>
             <li class="nav-item dropdown">
-              <a id="tuotteet-link" class="nav-link dropdown-toggle" onclick="showView('tuotteet-page')"
+              <a id="tuotteet-link" class="nav-link dropdown-toggle" onclick="showView('tuotteet-page');"
                 data-view="tuotteet-page" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 TUOTTEET
               </a>
               <div class="dropdown-menu" style="background-color: lightgrey; border: 0px">
-                <a id="kaikki-tuotteet-link" class="dropdown-item" href="#" style="color: #333"
-                  onclick="showView('kaikki-page')" data-view="kaikki">KAIKKI TUOTTEET</a>
-                <a id="ruokintalaitteet-link" class="dropdown-item" href="#" style="color: #333"
-                  onclick="showView('ruokintalaitteet-page')" data-view="ruokintalaitteet">RUOKINTALAITTEET</a>
-                <a id="terveydenseuranta-link" class="dropdown-item" href="#" style="color: #333"
-                  onclick="showView('terveydenseuranta-page')" data-view="terveydenseuranta">TERVEYDENSEURANTA</a>
-                <a id="valvontalaitteet-link" class="dropdown-item" href="#" style="color: #333"
-                  onclick="showView('valvontalaitteet-page')" data-view="valvontalaitteet">VALVONTALAITTEET</a>
-                <a id="lelut-link" class="dropdown-item" href="#" style="color: #333" onclick="showView('lelut-page')"
+                <a id="kaikki-tuotteet-link" class="dropdown-item" href="#"
+                  onclick="showView('kaikki-page'); hideNavbar();" data-view="kaikki">KAIKKI TUOTTEET</a>
+                <a id="ruokintalaitteet-link" class="dropdown-item" href="#"
+                  onclick="showView('ruokintalaitteet-page'); hideNavbar();"
+                  data-view="ruokintalaitteet">RUOKINTALAITTEET</a>
+                <a id="terveydenseuranta-link" class="dropdown-item" href="#"
+                  onclick="showView('terveydenseuranta-page'); hideNavbar();"
+                  data-view="terveydenseuranta">TERVEYDENSEURANTA</a>
+                <a id="valvontalaitteet-link" class="dropdown-item" href="#"
+                  onclick="showView('valvontalaitteet-page'); hideNavbar();"
+                  data-view="valvontalaitteet">VALVONTALAITTEET</a>
+                <a id="lelut-link" class="dropdown-item" href="#" onclick="showView('lelut-page'); hideNavbar();"
                   data-view="lelut">LELUT</a>
 
-                <a id="muut-link" class="dropdown-item" href="#" style="color: #333" onclick="showView('muut-page')"
+                <a id="muut-link" class="dropdown-item" href="#" onclick="showView('muut-page'); hideNavbar();"
                   data-view="muut">MUUT</a>
               </div>
             </li>
             <li class="nav-item">
-              <a id="yritykset-link" class="nav-link" href="#" onclick="showView('yritykset-page')"
+              <a id="yritykset-link" class="nav-link" href="#" onclick="showView('yritykset-page'); hideNavbar();"
                 data-view="yritykset-page">YRITYKSET</a>
             </li>
             <li class="nav-item">
-              <a id="taustatoiminta-link" class="nav-link" href="#" onclick="showView('taustatoiminta-page')"
+              <a id="taustatoiminta-link" class="nav-link" href="#"
+                onclick="showView('taustatoiminta-page'); hideNavbar();"
                 data-view="taustatoiminta-page">TAUSTATOIMINTA</a>
-         
             </li>
             <li class="nav-item">
-              <a id="yhteystiedot-link" class="nav-link" href="#" onclick="showView('yhteystiedot-page')"
+              <a id="yhteystiedot-link" class="nav-link" href="#" onclick="showView('yhteystiedot-page'); hideNavbar();"
                 data-view="yhteystiedot-page">YHTEYSTIEDOT</a>
-              
             </li>
-
           </ul>
         </div>
       </div>
     </nav>
+
 
     <!-- SISÄLTÖ -->
     <div id="etusivu-page" class="view">
@@ -391,12 +350,10 @@
               maailman ensimmäisenä koiran tunteita tulkitsevana laitteena. Panta hyödyntää edistyksellistä
               tekoälyä ja algoritmeja, jotka analysoivat yli 10 000 koiran haukuntaääntä, luoden kategoriat kuten
               ilo, suru, ahdistus ja viha. </p>
-            <p style="color: #989696;">Kuva: <a href="https://www.petpuls.net/buy?lang=en"
+            <p>Teksti ja kuva: <a href="https://www.petpuls.net/buy?lang=en"
                 target="_blank">https://www.petpuls.net/buy?lang=en</a></p>
 
-            <a href="#" class="btn btn-secondary nav-link product-details-btn"
-              style="width: 120px; margin-top: 1rem; padding: 1%; color: aliceblue;" data-product="PetPuls -älypanta"
-              data-view="tuotteet-page"
+            <a href="#" class="btn btn-secondary" data-product="PetPuls -älypanta" data-view="tuotteet-page"
               onclick="showView('tuotteet-page'); showProductDetails('PetPuls -älypanta');">Tuotesivulle</a>
           </div>
         </div>
@@ -456,7 +413,7 @@
                   vuorovaikutusta lemmikin kanssa. Se saattaa myös estää omistajaa lukemasta lemmikin tarpeita
                   intuitiivisesti.</li>
               </ul>
-              <p style="color: #989696;">Teksti ja kuva: ChatGPT</p>
+              <p>Teksti ja kuva: ChatGPT</p>
             </div>
 
             <button id="lueLisaaNappi1" class="btn btn-secondary">Lue lisää</button>
@@ -500,7 +457,7 @@
                 aktiivisina ja terveinä. Säännöllinen liikunta on tunnetusti yksi elämänlaatua ja elinikää
                 parantavista tekijöistä myös lemmikeille.</p>
 
-              <p style="color: #989696;">Teksti ja kuva: ChatGPT</p>
+              <p>Teksti ja kuva: ChatGPT</p>
             </div>
 
             <button id="lueLisaaNappi" class="btn btn-secondary">Lue lisää</button>
@@ -520,7 +477,7 @@
               kotoisin oleva yritys, joka on erikoistunut lemmikkieläinten seurantalaitteiden ja muiden lemmikkiin
               liittyvien teknologisten ratkaisujen kehittämiseen.</p>
 
-            <p style="color: #989696;">Kuva: https://tractive.com/en/pd/gps-tracker-cat</p>
+            <p>Teksti ja kuva: https://tractive.com/en/pd/gps-tracker-cat</p>
             <a href="#" class="btn btn-secondary" data-view="tuotteet-page"
               onclick="showView('tuotteet-page'); showProductDetails('Tractive GPS Tracker for Cats');">Tuotesivulle</a>
           </div>
@@ -628,7 +585,7 @@
           <iframe id="video" frameborder="0" allowfullscreen></iframe>
           <p id="tuote-lähde"></p>
           <br>
-          <button id="takaisin-btn" onclick="hideProductDetails()">Takaisin</button>
+          <button class="btn btn-secondary" onclick="hideProductDetails()">Takaisin</button>
 
         </div>
       </div>
@@ -872,6 +829,11 @@
           </div>
           <div class="card card-body col-md-6" id="map">
           </div>
+          <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdCysXG_MEvxrj1L5V0T_i0g49Tigl2MY&loading=async&callback=initMap">
+              initMap();
+            </script>
+
           <br>
           <div class="row">
             <!-- Yhteydenottolomake Bootstrapilla -->
