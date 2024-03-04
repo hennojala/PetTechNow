@@ -31,6 +31,7 @@ function setLightTheme() {
 
   document.getElementById("banner").src = "photos/banneri.png";
   document.getElementById("popup").style.backgroundColor = "#bdfafa;";
+  document.getElementById("Dpopup").style.backgroundColor = "#bdfafa;";
   document.getElementById("lowerNav").style.backgroundColor = "#9accd1";
   document.getElementById("topNav").style.backgroundColor = "#edffff";
   document.getElementById("newsletter").style.color = "#052b14";
@@ -69,6 +70,7 @@ function setDarkTheme() {
   document.querySelector("footer").style.backgroundColor = "#050706";
   document.getElementById("lowerNav").style.backgroundColor = "#050706";
   document.getElementById("popup").style.backgroundColor = "#050706";
+  document.getElementById("Dpopup").style.backgroundColor = "#050706";
   document.getElementById("newsletter").style.color = "#E8E8E8";
   document.getElementById("newsletter").style.backgroundColor = "#182721";
   document.getElementById("topNav").style.backgroundColor = "#050706";
