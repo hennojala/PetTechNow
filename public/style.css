@@ -489,7 +489,7 @@ h5 {
   }
 
   .card-container img {
-    max-width: 80%;
+    max-width: 60%;
     height: auto;
     object-fit: cover;
     padding: 5%;

@@ -43,7 +43,11 @@ function setLightTheme() {
 function setDarkTheme() {
   document.body.style.backgroundColor = "#1E2F2D";
   document.querySelectorAll("i").forEach(function (link) {
-    link.style.color = "white";
+    if (link.closest("#yhteystiedot-page")) {
+      link.style.color = "black";
+    } else {
+      link.style.color = "white";
+    }
   });
   document
     .querySelectorAll(
@@ -129,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Tarkista tallennettu fonttikoko, kun sivu ladataan tai päivitetään
 window.addEventListener("DOMContentLoaded", checkFontSize);
-window.addEventListener("load", checkFontSize); // Varmuuden vuoksi lisätään myös load-tapahtumankuuntelija
+// window.addEventListener("load", checkFontSize); // Varmuuden vuoksi lisätään myös load-tapahtumankuuntelija
 
 function checkFontSize() {
   var savedFontSize = localStorage.getItem("fontSize");
