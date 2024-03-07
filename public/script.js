@@ -30,8 +30,8 @@ function setLightTheme() {
   });
 
   document.getElementById("banner").src = "photos/banneri.png";
-  document.getElementById("popup").style.backgroundColor = "#bdfafa;";
-  document.getElementById("Dpopup").style.backgroundColor = "#bdfafa;";
+  document.getElementById("popup").style.backgroundColor = "#bdfafa";
+  document.getElementById("Dpopup").style.backgroundColor = "#bdfafa";
   document.getElementById("lowerNav").style.backgroundColor = "#9accd1";
   document.getElementById("topNav").style.backgroundColor = "#edffff";
   document.getElementById("newsletter").style.color = "#052b14";

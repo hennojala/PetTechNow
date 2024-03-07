@@ -5,6 +5,7 @@ body {
   font-weight: 400;
   font-style: normal;
   font-size: 14px;
+  cursor: auto;
 }
 #navbarSupportedContentLowerNav .nav-item {
   position: relative; /* Aseta sijainti suhteelliseksi */
@@ -138,6 +139,10 @@ a:active {
   background-color: #a7bbb9 !important;
   box-shadow: 0 0 5px 5px #5fc3d3;
   color: #052b14;
+}
+
+.ruksi {
+  color: red;
 }
 
 .popup {
@@ -342,6 +347,12 @@ h5 {
     height: auto; /* Säilytetään kuvasuhde */
     object-fit: cover;
     padding: 5%; /* Suhteellinen arvo */
+    background-color: transparent !important;
+  }
+
+  .card-container .image-link:hover {
+    box-shadow: 0 0 5px 5px #5fc3d3;
+    cursor: pointer;
   }
 
   h5 {

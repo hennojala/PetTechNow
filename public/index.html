@@ -309,7 +309,7 @@
                       class="btn btn-secondary mb-3">Tilaa</button>
 
                     <div id="popup" class="popup">
-                      <span id="close"
+                      <span class="ruksi" id="close"
                         style="cursor: pointer; position: absolute; top: 10px; right: 15px;">&times;</span>
                       <p>Kiitos mielenkiinnosta uutiskirjettämme kohtaa.</p>
                       <p>Valitettavasti tämä toiminnallisuus ei ole vielä käytössä sivustollamme.</p>
@@ -348,7 +348,9 @@
             <hr>
             <span class="float-right">23.2.2024</span>
             <p class="card-subtitle mb-2 text-muted">Kategoria: Tuotteet | Teveydenseuranta</p>
-            <img src="photos/Ajankohtaista ja Tuotteet/2.png" alt="Kuva 4">
+            <img src="photos/Ajankohtaista ja Tuotteet/2.png" alt="Kuva 4" data-product="PetPuls -älypanta"
+              data-view="tuotteet-page" onclick="showView('tuotteet-page'); showProductDetails('PetPuls -älypanta');"
+              class="nav-link image-link">
             <p class="card-text">Petpuls on Eteläkorealaisen teknologiayhtiön kehittämä älypanta, joka toimii
               maailman ensimmäisenä koiran tunteita tulkitsevana laitteena. Panta hyödyntää edistyksellistä
               tekoälyä ja algoritmeja, jotka analysoivat yli 10 000 koiran haukuntaääntä, luoden kategoriat kuten
@@ -476,7 +478,11 @@
             <hr>
             <span class="float-right">5.1.2024</span>
             <p class="card-subtitle mb-2 text-muted">Kategoria: Tuotteet | Valvontalaitteet</p>
-            <img src="photos/Ajankohtaista ja Tuotteet/cattrack.png" alt="Kuva 4">
+
+            <img src="photos/Ajankohtaista ja Tuotteet/cattrack.png" data-view="tuotteet-page" alt="Kuva 4"
+              onclick="showView('tuotteet-page'); showProductDetails('Tractive GPS Tracker for Cats');"
+              class="nav-link image-link">
+
             <p class="card-text">Tractive GPS Tracker for Cats -laitteen on kehittänyt Tractive GmbH, Itävallasta
               kotoisin oleva yritys, joka on erikoistunut lemmikkieläinten seurantalaitteiden ja muiden lemmikkiin
               liittyvien teknologisten ratkaisujen kehittämiseen.</p>
@@ -866,7 +872,8 @@
               <button id="lomakebtn" type="submit" class="btn btn-primary">Lähetä</button>
 
               <div id="Lpopup" class="Lpopup">
-                <span id="Lclose" style="cursor: pointer; position: absolute; top: 10px; right: 15px;">&times;</span>
+                <span class="ruksi" id="Lclose"
+                  style="cursor: pointer; position: absolute; top: 10px; right: 15px;">&times;</span>
                 <p>Hei!</p>
                 <p>Valitettavasti tämä toiminnallisuus ei ole vielä käytössä sivustollamme, voit ottaa meihin yhteyttä
                   toisella tapaa.</p>
@@ -919,7 +926,8 @@
       <button id="btnDelete" type="submit" class="btn btn-secondary mb-3">Peruuta</button>
 
       <div id="Dpopup" class="Dpopup">
-        <span id="Dclose" style="cursor: pointer; position: absolute; top: 10px; right: 15px;">&times;</span>
+        <span id="Dclose" class="ruksi"
+          style="cursor: pointer; position: absolute; top: 10px; right: 15px;">&times;</span>
         <p>Uutiskirjeen peruutus.</p>
         <p>Valitettavasti tämä toiminnallisuus ei ole vielä käytössä sivustollamme. Voit ottaa meihin yhteyttä muilla
           tavoin.</p>
