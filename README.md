@@ -14,3 +14,5 @@ Kurssin vaatimukset sivustolle:
 - Otsikoiden, ohjaustekstien sekä sisältöjen ensimmäisen kappaleen tulee kuitenkin olla aiheeseen liittyvää sisältöä.
 - yhteystiedot (oikeat tai fiktiiviset)
 - tekstien ja kuvien lisäksi jotain muuta sisältöä: vaihtoehtoja esim. multimediaelementit (videot, äänitallenteet ), vuorovaikutukselliset elementit (lomakkeet, kyselyt, upotetut kartat)
+
+Sivusto on hyvin simppeli, ja siinä on mielestäni paljon asioita joita olisin voinut tehdä paremmin. Sivusto on kuitenkin tehty kiireessä, eikä kaikkea toiminnallisuuksia ole toteutettu, eikä kurssi sitä vaatinutkaan, sillä kyseessä käyttöliittymä -kurssi.
